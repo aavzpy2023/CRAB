@@ -49,3 +49,10 @@
 <!-- Mode D: UI Dumb Views for REQ-014 and REQ-016 implicitly verified in Story 1.3 -->
 <!-- Mode D: Headless Exporter for REQ-015 implicitly verified in Story 1.4 -->
 <!-- Mode D: Assembly completed in Story 1.5 bridging hooks and dumb views safely. -->
+
+## CRAB Branding & Legacy ML Logic Synchronization (EPIC 9)
+
+- [ ] [REQ-026] ML Logic Synchronization (Dependencies, Features, XGBoost Inference).
+- [ ] [REQ-027] Asset Injection & Dumb View Branding (CRAB).
+- [ ] [REQ-028] UI Cleanup (Remove examples link).
+- [ ] [REQ-029] Results Navigation (State Fractality, Return to Home).
