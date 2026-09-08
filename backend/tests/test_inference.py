@@ -7,10 +7,9 @@ client = TestClient(app)
 
 @pytest.fixture
 def mock_model():
-    """Creates a mock model mimicking scikit-learn interface."""
+    """Creates a mock model mimicking xgboost interface."""
     model = MagicMock()
-    model.predict.return_value = [1]
-    model.predict_proba.return_value = [[0.1, 0.9]]
+    model.predict.return_value = [0.47]
     return model
 
 def test_predict_endpoint_no_model():
@@ -36,7 +35,7 @@ def test_predict_endpoint_success(mock_model):
         data = response.json()
         assert data["model_version"] == "v1.0.0"
         assert data["results"][0]["prediction"] == 1
-        assert data["results"][0]["probability"] == 0.9
+        assert data["results"][0]["probability"] == 0.47
         assert data["results"][0]["sequence"] == "ACGU"
         assert data["results"][0]["classification"] == "coding"
         mock_extract.assert_called_once_with("ACGU")

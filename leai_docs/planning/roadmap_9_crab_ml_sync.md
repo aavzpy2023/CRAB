@@ -32,8 +32,9 @@ EPIC 1: ML LOGIC SYNCHRONIZATION (BACKEND) | [ISOLATED VERTICAL]
   [ID-1.0.3] [LOGIC/MATH]: [1. In extract_3mers, rewrite the loop to iterate using range(0, len(sequence) - 2, 3) to extract non-overlapping codons. 2. Calculate frequencies by dividing by the total number of valid codons, exactly as the legacy script does]. Type: Task. 
   [ID-1.0.4] [PLANNING/SYNC]: [1. Open roadmap_9_crab_ml_sync.md and check - [x] for Story 1.0. 2. Append > Files touched: [files] under the story]. Type: Task.
 
-- [ ] Story 1.1: XGBoost DMatrix & Threshold Inference | [MoSCoW: MUST] | [Complexity: HARD] (<-- REQ-026) 
+- [x] Story 1.1: XGBoost DMatrix & Threshold Inference | [MoSCoW: MUST] | [Complexity: HARD] (<-- REQ-026) 
   Business Requirement: Ensure the backend constructs the correct matrix and applies the 0.4629 threshold. 
+  > Files touched: backend/main.py, backend/tests/test_inference.py
   Story Context Radius: {"backend/main.py": [""], "backend/tests/test_inference.py": [""], "backend/app/utils/feature_extraction.py": ["READ-ONLY"], "leai_docs/planning/roadmap_9_crab_ml_sync.md": [""], "leai_docs/planning/global_backlog.md": [""]} 
   Layered Technical Breakdown (FLASH-COMPATIBLE ALGORITHMS): 
   [ID-1.1.1] [TESTING/TDE]: [1. Open test_inference.py. 2. Mock the model prediction to return a probability of 0.47. 3. Assert the classification returned is coding (since 0.47 > 0.4629)]. Type: Task. 

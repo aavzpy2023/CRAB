@@ -7,9 +7,11 @@ from app.schemas.fasta import (
     SampleFastaResponse, FastaRecordDTO, 
     PredictionRequestDTO, PredictionResponseDTO, PredictionResultDTO
 )
+import pandas as pd
+import xgboost as xgb
 from app.utils.fasta_parser import parse_fasta_bytes
 from app.utils.model_loader import load_model
-from app.utils.feature_extraction import extract_3mers
+from app.utils.feature_extraction import extract_3mers, KMER_KEYS
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -79,9 +81,10 @@ async def predict_fasta(request: PredictionRequestDTO):
     results = []
     for record in request.records:
         # Feature extraction: trinucleotide matrices
-        features = [extract_3mers(record.sequence)]
-        pred = int(app.state.model.predict(features)[0])
-        prob = float(app.state.model.predict_proba(features)[0][pred])
+        features = extract_3mers(record.sequence)
+        dmatrix = xgb.DMatrix(pd.DataFrame([features], columns=KMER_KEYS))
+        prob = float(app.state.model.predict(dmatrix)[0])
+        pred = 1 if prob > 0.4629 else 0
         classification = "coding" if pred == 1 else "non-coding"
         
         results.append(PredictionResultDTO(
