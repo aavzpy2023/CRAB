@@ -77,10 +77,27 @@ const Navbar = ({ currentView, setView }) => {
   return (
     <header style={styles.navbar}>
     <div style={styles.navContent}>
-    <button onClick={() => handleNav('run')} style={{ display: 'flex', alignItems: 'center', gap: '8px', background: 'none', border: 'none', cursor: 'pointer' }}>
-    <span className="material-symbols-outlined" style={{ color: '#38bdf8', fontWeight: 'bold' }}>biotech</span>
-    <span style={{ fontSize: '22px', fontWeight: '700', color: '#38bdf8', letterSpacing: '-0.02em' }}>rnamining</span>
-    </button>
+            <button 
+              onClick={() => handleNav('run')} 
+              style={{
+                display: 'flex', alignItems: 'center', gap: '8px',
+                background: 'none', border: 'none', cursor: 'pointer'
+              }}
+            >
+              <img 
+                src="/src/assets/logo.ico" 
+                alt="CRAB Icon" 
+                style={{ height: '24px' }} 
+              />
+              <span 
+                style={{
+                  fontSize: '22px', fontWeight: '700',
+                  color: '#38bdf8', letterSpacing: '-0.02em'
+                }}
+              >
+                CRAB
+              </span>
+            </button>
 
     {/* Menú reordenado por flujo UX */}
     <nav style={styles.navLinks}>
