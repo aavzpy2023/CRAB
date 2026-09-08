@@ -8,7 +8,10 @@ from app.schemas.fasta import (
     PredictionRequestDTO, PredictionResponseDTO, PredictionResultDTO
 )
 import pandas as pd
-import xgboost as xgb
+try:
+    import xgboost as xgb
+except ImportError:
+    xgb = None
 from app.utils.fasta_parser import parse_fasta_bytes
 from app.utils.model_loader import load_model
 from app.utils.feature_extraction import extract_3mers, KMER_KEYS
@@ -77,7 +80,9 @@ async def predict_fasta(request: PredictionRequestDTO):
     """
     if not getattr(app.state, "model", None):
         raise HTTPException(status_code=503, detail="Model not loaded")
-    
+    if xgb is None:
+        raise HTTPException(status_code=503, detail="XGBoost not installed")
+
     results = []
     for record in request.records:
         # Feature extraction: trinucleotide matrices

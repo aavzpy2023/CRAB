@@ -28,7 +28,9 @@ def test_predict_endpoint_success(mock_model):
     payload = {
         "records": [{"header": "seq1", "sequence": "ACGU", "length": 4}]
     }
-    with patch("main.extract_3mers", return_value=[0.0] * 64) as mock_extract:
+    with patch("main.extract_3mers", return_value=[0.0] * 64) as mock_extract, \
+         patch("main.xgb") as mock_xgb:
+        mock_xgb.DMatrix.return_value = MagicMock()
         response = client.post("/api/v1/fasta/predict", json=payload)
         
         assert response.status_code == 200
