@@ -13,8 +13,9 @@ EPIC 0: BASE INFRASTRUCTURE & DEPENDENCIES | [ISOLATED VERTICAL]
   Layered Technical Breakdown: 
   [ID-0.0.1] [PLANNING/INIT]: [1. Create leai_docs/planning/ directory if missing. 2. Append EPIC 9 and [REQ-026] to [REQ-029] to leai_docs/planning/global_backlog.md. 3. Write THIS ENTIRE raw markdown response (INCLUDING the YAML Frontmatter block above) into leai_docs/planning/roadmap_9_crab_ml_sync.md]. Type: Task.
 
-- [ ] Story 0.1: ML Dependency Provisioning | [MoSCoW: MUST] | [Complexity: EASY] (<-- REQ-026) 
+- [x] Story 0.1: ML Dependency Provisioning | [MoSCoW: MUST] | [Complexity: EASY] (<-- REQ-026) 
   Business Requirement: Provision native XGBoost and Pandas dependencies required for legacy model execution. 
+  > Files touched: backend/pyproject.toml, backend/rna_mining_backend.egg-info/requires.txt
   Story Context Radius: {"backend/pyproject.toml": [""], "backend/rna_mining_backend.egg-info/requires.txt": [""], "leai_docs/planning/roadmap_9_crab_ml_sync.md": [""], "leai_docs/planning/global_backlog.md": [""]} 
   Layered Technical Breakdown (FLASH-COMPATIBLE ALGORITHMS): 
   [ID-0.1.1] [ENVIRONMENT/DEPS]: [1. Open backend/pyproject.toml. 2. Add xgboost>=2.0.0 and pandas>=2.0.0 to dependencies. 3. Mirror these additions in backend/rna_mining_backend.egg-info/requires.txt]. Type: Task. 
