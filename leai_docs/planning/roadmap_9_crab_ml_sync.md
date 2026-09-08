@@ -63,8 +63,9 @@ EPIC 2: CRAB BRANDING & UI REFINEMENT (FRONTEND) | [ISOLATED VERTICAL]
   [ID-2.1.1] [VIEW/CLEANUP]: [1. Open frontend/src/components/FastaUploadCard.jsx. 2. Locate and surgically delete the <button> containing the text '.fasta - examples' and its associated icon]. Type: Task. 
   [ID-2.1.2] [PLANNING/SYNC]: [1. Open roadmap_9_crab_ml_sync.md and check - [x] for Story 2.1. 2. Append > Files touched: [files] under the story. 3. Open global_backlog.md and check - [x] for [REQ-028]]. Type: Task.
 
-- [ ] Story 2.2: Results Navigation (State Fractality) | [MoSCoW: MUST] | [Complexity: EASY] (<-- REQ-029) 
+- [x] Story 2.2: Results Navigation (State Fractality) | [MoSCoW: MUST] | [Complexity: EASY] (<-- REQ-029) 
   Business Requirement: Allow users to return to the upload screen after viewing results, strictly separating hook logic from view injection. 
+  > Files touched: frontend/src/pages/Results.jsx
   Story Context Radius: {"frontend/src/pages/Results.jsx": [""], "leai_docs/planning/roadmap_9_crab_ml_sync.md": [""], "leai_docs/planning/global_backlog.md": ["*"]} 
   Layered Technical Breakdown (FLASH-COMPATIBLE ALGORITHMS): 
   [ID-2.2.1] [TESTING/TDE]: [1. Mount Results page with mock data. 2. Assert a "New Analysis" button exists and triggers navigate('/')]. Type: Task. 

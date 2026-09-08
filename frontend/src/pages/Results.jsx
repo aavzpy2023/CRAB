@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation, Link, useNavigate } from 'react-router-dom';
 import { useFastaExport } from '../hooks/useFastaExport';
 import { useTableLogic } from '../hooks/useTableLogic';
 import { ResultsTable } from '../components/ResultsTable';
@@ -22,6 +22,7 @@ const isNonCodingRecord = (item) => {
 
 export default function Results() {
   const location = useLocation();
+  const navigate = useNavigate();
   const data = location.state?.data || [];
   const validData = data.filter(item => Number(item.probability) > 0);
   const hiddenCount = data.length - validData.length;
@@ -43,6 +44,12 @@ export default function Results() {
     <div style={{ color: '#f8fafc', padding: '20px', minHeight: '100vh', width: '100%', alignSelf: 'flex-start' }}>
       <h2 style={{ marginBottom: '16px' }}>📊 Analysis Results</h2>
       <div style={{ display: 'flex', gap: '12px', marginBottom: '20px' }}>
+        <button 
+          onClick={() => navigate('/')} 
+          style={{ ...btnStyle, backgroundColor: '#10b981' }}
+        >
+          New Analysis
+        </button>
         <button 
           onClick={() => exportAll(validData)} 
           style={{ ...btnStyle, ...(validData.length === 0 ? disabledBtnStyle : {}) }}

@@ -55,4 +55,4 @@
 - [x] [REQ-026] ML Logic Synchronization (Dependencies, Features, XGBoost Inference).
 - [x] [REQ-027] Asset Injection & Dumb View Branding (CRAB).
 - [x] [REQ-028] UI Cleanup (Remove examples link).
-- [ ] [REQ-029] Results Navigation (State Fractality, Return to Home).
+- [x] [REQ-029] Results Navigation (State Fractality, Return to Home).
