@@ -95,7 +95,7 @@ const Navbar = ({ currentView, setView }) => {
                   color: '#38bdf8', letterSpacing: '-0.02em'
                 }}
               >
-                CRAB
+                CODING RNA ASSESSMENT IN BACTERIA
               </span>
             </button>
 
@@ -167,7 +167,7 @@ function App() {
           {currentView === 'run' && (
             <div style={{ width: '100%' }}>
             <section style={styles.hero}>
-        <img src="/src/assets/logo.jpeg" alt="CRAB Logo" style={{ maxWidth: '200px', margin: '0 auto 16px auto', display: 'block', borderRadius: '12px' }} />
+        <img src="/src/assets/logo.png" alt="CRAB Logo" style={{ maxWidth: '200px', margin: '0 auto 16px auto', display: 'block', borderRadius: '12px' }} />
         <p style={styles.heroP}>Upload your .fasta files to begin.</p>
         </section>
 

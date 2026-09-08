@@ -105,7 +105,9 @@ export const ResultsTable = ({ data, searchHandlers, paginationHandlers }) => {
                                     {formatId(row.id)}
                                 </span>
                             </td>
-                            <td style={tdStyle}>{getClassification(row.id, row.classification)}</td>
+                            <td style={tdStyle}>
+                                {getClassification(row.id, row.classification || row.prediction)}
+                            </td>
                             <td style={tdStyle}>
                                 {Number(row.probability || 0).toFixed(4)}
                             </td>

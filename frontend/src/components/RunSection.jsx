@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const styles = {
@@ -13,16 +13,18 @@ const styles = {
  */
 const createUnifiedData = (text, apiResult) => {
     const blocks = text.split('>').filter(b => b.trim());
-    const predictions = apiResult?.predictions || [];
+    const predictions = apiResult?.predictions || apiResult?.results || [];
     
     return blocks.map((block, index) => {
         const lines = block.split('\n');
         const id = lines[0].trim();
         const sequence = lines.slice(1).join('').replace(/\s/g, '');
+        const cls = predictions[index]?.classification || 'unknown';
         return {
             id,
             sequence,
-            prediction: predictions[index]?.classification || 'Unknown',
+            prediction: cls,
+            classification: cls,
             probability: predictions[index]?.probability || 0.0
         };
     });
@@ -30,9 +32,10 @@ const createUnifiedData = (text, apiResult) => {
 
 export const RunSection = ({ isRunning, disabled, onClick, result, file }) => {
     const navigate = useNavigate();
+    const wasRunningRef = useRef(false);
 
     useEffect(() => {
-        if (result && file && !isRunning) {
+        if (wasRunningRef.current && !isRunning && result && file) {
             const processAndNavigate = async () => {
                 try {
                     let text = '';
@@ -49,6 +52,7 @@ export const RunSection = ({ isRunning, disabled, onClick, result, file }) => {
             };
             processAndNavigate();
         }
+        wasRunningRef.current = isRunning;
     }, [result, file, isRunning, navigate]);
 
     return (
