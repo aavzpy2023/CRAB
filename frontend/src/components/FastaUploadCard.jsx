@@ -179,17 +179,7 @@ export function FastaUploadCard({
             </span>
             View sequences
           </button>
-          <button
-            style={styles.actionBtn}
-            onClick={(e) => { e.stopPropagation(); setIsModalOpen(true); }}
-            onMouseEnter={(e) => e.target.style.color = '#38bdf8'}
-            onMouseLeave={(e) => e.target.style.color = '#94a3b8'}
-          >
-            <span className="material-symbols-outlined" style={{ fontSize: '16px', pointerEvents: 'none' }}>
-              info
-            </span>
-            .fasta - examples
-          </button>
+
         </div>
       </div>
 

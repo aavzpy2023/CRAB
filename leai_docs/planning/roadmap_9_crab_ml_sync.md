@@ -55,8 +55,9 @@ EPIC 2: CRAB BRANDING & UI REFINEMENT (FRONTEND) | [ISOLATED VERTICAL]
   [ID-2.0.3] [VIEW/HERO]: [1. Open frontend/src/App.jsx. 2. Locate <h1 style={styles.heroH1}>Run Analysis</h1>. 3. Replace it with <img src="/src/assets/logo.jpeg" alt="CRAB Logo" style={{ maxWidth: '200px', margin: '0 auto 16px auto', display: 'block', borderRadius: '12px' }} />]. Type: Task. 
   [ID-2.0.4] [PLANNING/SYNC]: [1. Open roadmap_9_crab_ml_sync.md and check - [x] for Story 2.0. 2. Append > Files touched: [files] under the story. 3. Open global_backlog.md and check - [x] for [REQ-027]]. Type: Task.
 
-- [ ] Story 2.1: UI Cleanup (Dumb View) | [MoSCoW: MUST] | [Complexity: TRIVIAL] (<-- REQ-028) 
+- [x] Story 2.1: UI Cleanup (Dumb View) | [MoSCoW: MUST] | [Complexity: TRIVIAL] (<-- REQ-028) 
   Business Requirement: Remove the unnecessary examples link from the upload card. 
+  > Files touched: frontend/src/components/FastaUploadCard.jsx
   Story Context Radius: {"frontend/src/components/FastaUploadCard.jsx": [""], "leai_docs/planning/roadmap_9_crab_ml_sync.md": [""], "leai_docs/planning/global_backlog.md": ["*"]} 
   Layered Technical Breakdown (FLASH-COMPATIBLE ALGORITHMS): 
   [ID-2.1.1] [VIEW/CLEANUP]: [1. Open frontend/src/components/FastaUploadCard.jsx. 2. Locate and surgically delete the <button> containing the text '.fasta - examples' and its associated icon]. Type: Task. 
