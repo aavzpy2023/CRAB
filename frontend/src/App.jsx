@@ -150,7 +150,7 @@ function App() {
           {currentView === 'run' && (
             <div style={{ width: '100%' }}>
             <section style={styles.hero}>
-        <h1 style={styles.heroH1}>Run Analysis</h1>
+        <img src="/src/assets/logo.jpeg" alt="CRAB Logo" style={{ maxWidth: '200px', margin: '0 auto 16px auto', display: 'block', borderRadius: '12px' }} />
         <p style={styles.heroP}>Upload your .fasta files to begin.</p>
         </section>
 

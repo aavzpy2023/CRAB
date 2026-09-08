@@ -45,8 +45,9 @@ EPIC 1: ML LOGIC SYNCHRONIZATION (BACKEND) | [ISOLATED VERTICAL]
 
 EPIC 2: CRAB BRANDING & UI REFINEMENT (FRONTEND) | [ISOLATED VERTICAL]
 
-- [ ] Story 2.0: Asset Injection & Dumb View Branding | [MoSCoW: MUST] | [Complexity: EASY] (<-- REQ-027) 
+- [x] Story 2.0: Asset Injection & Dumb View Branding | [MoSCoW: MUST] | [Complexity: EASY] (<-- REQ-027) 
   Business Requirement: Apply CRAB branding assets to the HTML shell and React views. 
+  > Files touched: frontend/index.html, frontend/src/components/Navbar.jsx, frontend/src/App.jsx
   Story Context Radius: {"frontend/index.html": [""], "frontend/src/components/Navbar.jsx": [""], "frontend/src/App.jsx": [""], "leai_docs/planning/roadmap_9_crab_ml_sync.md": [""], "leai_docs/planning/global_backlog.md": ["*"]} 
   Layered Technical Breakdown (FLASH-COMPATIBLE ALGORITHMS): 
   [ID-2.0.1] [VIEW/HTML]: [1. Open frontend/index.html. 2. Change <title> to CRAB. 3. Add <link rel="icon" href="/src/assets/logo.ico" />]. Type: Task. 

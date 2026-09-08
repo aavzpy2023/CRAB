@@ -28,7 +28,10 @@ export function Navbar() {
 
   return (
     <header style={styles.header} data-testid="navbar">
-      <h2 style={styles.title}>RNA Mining Dashboard</h2>
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <img src="/src/assets/logo.ico" alt="CRAB Icon" style={{ height: '24px', marginRight: '8px' }} />
+        <h2 style={styles.title}>CRAB</h2>
+      </div>
       <span style={styles.badge}>v1.0.0</span>
     </header>
   );
