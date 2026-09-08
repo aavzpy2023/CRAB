@@ -33,9 +33,12 @@ export const useFastaExport = () => {
     };
 
     const generateFastaText = (data) => {
-        return data
-            .map(d => `>${formatHeader(d.id)}\n${wrapSequence(d.sequence, 60)}`)
-            .join('\n') + '\n';
+        return data.map(d => {
+            const cleanId = (d.id || '').trim().replace(/^>/, '').split(/\s+/)[0];
+            const label = isCoding(d) ? 'coding_protein' : 'ncRNA';
+            const prob = Number(d.probability || 0).toFixed(4);
+            return `>${cleanId} prediction=${label} prob=${prob}\n${wrapSequence(d.sequence, 60)}`;
+        }).join('\n') + '\n';
     };
 
     const triggerZipDownload = async (fastaContent, fastaFilename, zipFilename) => {
@@ -47,42 +50,37 @@ export const useFastaExport = () => {
 
     const exportAll = useCallback(async (data) => {
         if (!data || data.length === 0) return;
-        const text = generateFastaText(data);
-        await triggerZipDownload(text, 'results_all.fasta', 'results_all.zip');
+        const codingData = data.filter(isCoding);
+        const nonCodingData = data.filter(isNonCoding);
+        const zip = new JSZip();
+        zip.file('coding_protein.fasta', generateFastaText(codingData));
+        zip.file('ncRNA.fasta', generateFastaText(nonCodingData));
+        const zipBlob = await zip.generateAsync({ type: 'blob' });
+        saveAs(zipBlob, 'predictions_fasta.zip');
     }, []);
 
     const isCoding = (d) => {
-        const lowerId = (d.id || '').toLowerCase();
         const cls = (d.classification || d.prediction || '').toLowerCase();
-        if (lowerId.includes('cds')) return true;
-        if (lowerId.includes('ncrna')) return false;
-        return cls === 'coding';
+        return cls.includes('coding') && !cls.includes('non');
     };
 
     const isNonCoding = (d) => {
-        const lowerId = (d.id || '').toLowerCase();
         const cls = (d.classification || d.prediction || '').toLowerCase();
-        if (lowerId.includes('ncrna')) return true;
-        if (lowerId.includes('cds')) return false;
-        return cls === 'non-coding';
+        return cls.includes('ncrna') || cls.includes('non');
     };
 
     const exportCoding = useCallback(async (data) => {
         if (!data || data.length === 0) return;
         const filtered = data.filter(isCoding);
         const text = generateFastaText(filtered);
-        await triggerZipDownload(text, 'results_coding.fasta', 'results_coding.zip');
+        await triggerZipDownload(text, 'coding_protein.fasta', 'coding_protein.zip');
     }, []);
 
     const exportNonCoding = useCallback(async (data) => {
         if (!data || data.length === 0) return;
         const filtered = data.filter(isNonCoding);
         const text = generateFastaText(filtered);
-        await triggerZipDownload(
-            text,
-            'results_non-coding.fasta',
-            'results_non-coding.zip'
-        );
+        await triggerZipDownload(text, 'ncRNA.fasta', 'ncRNA.zip');
     }, []);
 
     return { exportAll, exportCoding, exportNonCoding };

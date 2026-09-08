@@ -1,4 +1,4 @@
-from fastapi import FastAPI, UploadFile, File, HTTPException
+from fastapi import FastAPI, UploadFile, File, Form, HTTPException
 import sys
 from typing import List
 from pathlib import Path
@@ -19,7 +19,10 @@ from app.utils.feature_extraction import extract_3mers, KMER_KEYS
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Handles application startup and shutdown events."""
-    model_path = "backend/app/models/rna_classifier.joblib"
+    base_dir = Path(__file__).resolve().parent
+    model_dir = base_dir / "app" / "models"
+    candidates = list(model_dir.glob("*.pkl")) + list(model_dir.glob("*.joblib"))
+    model_path = str(candidates[0]) if candidates else str(model_dir / "rna_classifier.joblib")
     app.state.model = load_model(model_path)
     yield
     if hasattr(app.state, "model"):
@@ -101,6 +104,48 @@ async def predict_fasta(request: PredictionRequestDTO):
         ))
     
     return PredictionResponseDTO(results=results, model_version="v1.0.0")
+
+@app.post("/api/inference")
+async def run_inference(
+    file: UploadFile = File(...),
+    organism: str = Form(default="")
+):
+    if not getattr(app.state, "model", None):
+        base_dir = Path(__file__).resolve().parent
+        model_dir = base_dir / "app" / "models"
+        candidates = list(model_dir.glob("*.pkl")) + list(model_dir.glob("*.joblib"))
+        if candidates:
+            app.state.model = load_model(str(candidates[0]))
+        if not getattr(app.state, "model", None):
+            raise HTTPException(status_code=503, detail="Model not loaded")
+    if xgb is None:
+        raise HTTPException(status_code=503, detail="XGBoost not installed")
+
+    content = await file.read()
+    records = parse_fasta_bytes(content)
+    predictions = []
+    if records:
+        feature_rows = [extract_3mers(r.sequence) for r in records]
+        df = pd.DataFrame(feature_rows, columns=KMER_KEYS)
+        dmatrix = xgb.DMatrix(df)
+        probs = app.state.model.predict(dmatrix)
+        for r, prob in zip(records, probs):
+            p_val = float(prob)
+            label = "coding_protein" if p_val > 0.4629 else "ncRNA"
+            predictions.append({
+                "id": r.header,
+                "sequence": r.sequence,
+                "prediction": label,
+                "classification": label,
+                "probability": round(p_val, 4)
+            })
+
+    return {
+        "status": "success",
+        "jobId": f"crab_{len(records)}",
+        "organism": organism,
+        "predictions": predictions
+    }
 
 @app.get("/api/requirements")
 def get_requirements():

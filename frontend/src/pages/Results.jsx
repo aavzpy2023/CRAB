@@ -5,19 +5,13 @@ import { useTableLogic } from '../hooks/useTableLogic';
 import { ResultsTable } from '../components/ResultsTable';
 
 const isCodingRecord = (item) => {
-  const lowerId = (item.id || '').toLowerCase();
   const cls = (item.classification || item.prediction || '').toLowerCase();
-  if (lowerId.includes('cds')) return true;
-  if (lowerId.includes('ncrna')) return false;
-  return cls === 'coding';
+  return cls.includes('coding') && !cls.includes('non');
 };
 
 const isNonCodingRecord = (item) => {
-  const lowerId = (item.id || '').toLowerCase();
   const cls = (item.classification || item.prediction || '').toLowerCase();
-  if (lowerId.includes('ncrna')) return true;
-  if (lowerId.includes('cds')) return false;
-  return cls === 'non-coding';
+  return cls.includes('ncrna') || cls.includes('non');
 };
 
 export default function Results() {

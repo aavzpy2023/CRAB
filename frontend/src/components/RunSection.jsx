@@ -12,8 +12,20 @@ const styles = {
  * @returns {Array<{id: string, sequence: string, prediction: string, probability: number}>}
  */
 const createUnifiedData = (text, apiResult) => {
-    const blocks = text.split('>').filter(b => b.trim());
     const predictions = apiResult?.predictions || apiResult?.results || [];
+    if (predictions.length > 0 && predictions[0].sequence) {
+        return predictions.map(p => {
+            const cls = p.classification || p.prediction || 'Unknown';
+            return {
+                id: p.id || p.header,
+                sequence: p.sequence,
+                prediction: cls,
+                classification: cls,
+                probability: p.probability ?? 0.0
+            };
+        });
+    }
+    const blocks = text.split('>').filter(b => b.trim());
     
     return blocks.map((block, index) => {
         const lines = block.split('\n');

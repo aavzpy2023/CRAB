@@ -33,9 +33,9 @@ const formatId = (id) => {
 };
 
 const getClassification = (id, fallback) => {
-    const lower = (id || '').toLowerCase();
-    if (lower.includes('ncrna')) return 'non-coding';
-    if (lower.includes('cds')) return 'coding';
+    const lower = (fallback || id || '').toLowerCase();
+    if (lower.includes('coding') && !lower.includes('non')) return 'coding_protein';
+    if (lower.includes('ncrna') || lower.includes('non')) return 'ncRNA';
     return fallback || 'unknown';
 };
 

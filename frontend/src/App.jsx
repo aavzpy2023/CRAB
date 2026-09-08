@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useAnalysisRunner } from './hooks/useAnalysisRunner';
 import { useFastaUpload } from './hooks/useFastaUpload';
 import { useOrganismSelect } from './hooks/useOrganismSelect';
 import { FastaUploadCard } from './components/FastaUploadCard';
@@ -13,35 +14,7 @@ import Download from './pages/Download';
 import Results from './pages/Results';
 import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
 
-// ==========================================
-// MOCK HOOKS (Para pruebas locales)
-// ==========================================
-const useAnalysisRunner = () => {
-  const [isRunning, setIsRunning] = useState(false);
-  const [result, setResult] = useState(null);
-  const [error, setError] = useState(null);
 
-  const executeAnalysis = (file, organism) => {
-    if (!file) return;
-    setIsRunning(true);
-    setResult(null);
-    setError(null);
-    setTimeout(() => {
-      setIsRunning(false);
-      setResult({ 
-        status: 'success', 
-        jobId: 'rna_12345', 
-        organism, 
-        predictions: [
-          { classification: 'coding', probability: 0.98 },
-          { classification: 'non-coding', probability: 0.85 }
-        ]
-      });
-    }, 2000);
-  };
-
-  return { isRunning, result, error, executeAnalysis };
-};
 
 // ==========================================
 // ESTILOS DE APP Y NAVEGACIÓN
