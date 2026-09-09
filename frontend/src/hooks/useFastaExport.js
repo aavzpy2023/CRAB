@@ -41,11 +41,18 @@ export const useFastaExport = () => {
         }).join('\n') + '\n';
     };
 
-    const triggerZipDownload = async (fastaContent, fastaFilename, zipFilename) => {
-        const zip = new JSZip();
-        zip.file(fastaFilename, fastaContent);
-        const zipBlob = await zip.generateAsync({ type: 'blob' });
-        saveAs(zipBlob, zipFilename);
+    const generateCsvText = (data) => {
+        const header = 'seq_id,probabilidad_coding,prediccion_label\n';
+        const rows = data.map((d) => {
+            const cleanId = (d.id || '')
+            .trim()
+            .replace(/^>/, '')
+            .split(/\s+/)[0];
+            const prob = Number(d.probability || 0).toFixed(4);
+            const label = isCoding(d) ? 'coding_protein' : 'ncRNA';
+            return `${cleanId},${prob},${label}`;
+        });
+        return header + rows.join('\n') + '\n';
     };
 
     const exportAll = useCallback(async (data) => {
@@ -55,6 +62,7 @@ export const useFastaExport = () => {
         const zip = new JSZip();
         zip.file('coding_protein.fasta', generateFastaText(codingData));
         zip.file('ncRNA.fasta', generateFastaText(nonCodingData));
+        zip.file('predictions.csv', generateCsvText(data));
         const zipBlob = await zip.generateAsync({ type: 'blob' });
         saveAs(zipBlob, 'predictions.zip');
     }, []);
@@ -72,15 +80,21 @@ export const useFastaExport = () => {
     const exportCoding = useCallback(async (data) => {
         if (!data || data.length === 0) return;
         const filtered = data.filter(isCoding);
-        const text = generateFastaText(filtered);
-        await triggerZipDownload(text, 'coding_protein.fasta', 'coding_protein.zip');
+        const zip = new JSZip();
+        zip.file('coding_protein.fasta', generateFastaText(filtered));
+        zip.file('predictions.csv', generateCsvText(filtered));
+        const zipBlob = await zip.generateAsync({ type: 'blob' });
+        saveAs(zipBlob, 'coding_protein.zip');
     }, []);
 
     const exportNonCoding = useCallback(async (data) => {
         if (!data || data.length === 0) return;
         const filtered = data.filter(isNonCoding);
-        const text = generateFastaText(filtered);
-        await triggerZipDownload(text, 'ncRNA.fasta', 'ncRNA.zip');
+        const zip = new JSZip();
+        zip.file('ncRNA.fasta', generateFastaText(filtered));
+        zip.file('predictions.csv', generateCsvText(filtered));
+        const zipBlob = await zip.generateAsync({ type: 'blob' });
+        saveAs(zipBlob, 'ncRNA.zip');
     }, []);
 
     return { exportAll, exportCoding, exportNonCoding };
