@@ -7,6 +7,7 @@ from app.schemas.fasta import (
     SampleFastaResponse, FastaRecordDTO, 
     PredictionRequestDTO, PredictionResponseDTO, PredictionResultDTO
 )
+import itertools
 import pandas as pd
 try:
     import xgboost as xgb
@@ -15,6 +16,8 @@ except ImportError:
 from app.utils.fasta_parser import parse_fasta_bytes
 from app.utils.model_loader import load_model
 from app.utils.feature_extraction import extract_3mers, KMER_KEYS
+
+DNA_KMERS = [''.join(p) for p in itertools.product(['A', 'C', 'G', 'T'], repeat=3)]
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -85,8 +88,11 @@ async def predict_fasta(request: PredictionRequestDTO):
     results = []
     for record in request.records:
         # Feature extraction: trinucleotide matrices
-        features = extract_3mers(record.sequence)
-        dmatrix = xgb.DMatrix(pd.DataFrame([features], columns=KMER_KEYS))
+        raw_cols = getattr(app.state.model, "feature_names", None)
+        has_cols = isinstance(raw_cols, (list, tuple)) and len(raw_cols) > 0
+        cols = raw_cols if has_cols else DNA_KMERS
+        features = extract_3mers(record.sequence, cols)
+        dmatrix = xgb.DMatrix(pd.DataFrame([features], columns=cols))
         prob = float(app.state.model.predict(dmatrix)[0])
         pred = 1 if prob > 0.4629 else 0
         classification = "coding" if pred == 1 else "non-coding"
@@ -130,8 +136,11 @@ async def run_inference(
     records = parse_fasta_bytes(content)
     predictions = []
     if records:
-        feature_rows = [extract_3mers(r.sequence) for r in records]
-        df = pd.DataFrame(feature_rows, columns=KMER_KEYS)
+        raw_cols = getattr(app.state.model, "feature_names", None)
+        has_cols = isinstance(raw_cols, (list, tuple)) and len(raw_cols) > 0
+        cols = raw_cols if has_cols else DNA_KMERS
+        feature_rows = [extract_3mers(r.sequence, cols) for r in records]
+        df = pd.DataFrame(feature_rows, columns=cols)
         dmatrix = xgb.DMatrix(df)
         probs = app.state.model.predict(dmatrix)
         for r, prob in zip(records, probs):

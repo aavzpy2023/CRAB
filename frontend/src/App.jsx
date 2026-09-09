@@ -90,7 +90,7 @@ const Navbar = ({ currentView, setView }) => {
 const Footer = () => (
   <footer style={styles.footer}>
   <p style={{ fontSize: '12px', color: '#64748b', margin: 0, textTransform: 'uppercase' }}>
-  Copyright © 2026 Programming RNA Lab - Universidad Tecnológica Metropolitana
+  Copyright © 2026 Laboratory of Integrative Bioinformatics - University of Chile
   </p>
   </footer>
 );
@@ -141,7 +141,6 @@ function App() {
             <div style={{ width: '100%' }}>
             <section style={styles.hero}>
         <img src="/src/assets/logo.png" alt="CRAB Logo" style={{ maxWidth: '200px', margin: '0 auto 16px auto', display: 'block', borderRadius: '12px' }} />
-        <p style={styles.heroP}>Upload your .fasta files to begin.</p>
         </section>
 
         <FastaUploadCard
