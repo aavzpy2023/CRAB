@@ -27,7 +27,7 @@ export default function Results() {
 
   if (!data || data.length === 0) {
     return (
-      <div style={{ color: '#f8fafc', padding: '40px', textAlign: 'center', minHeight: '100vh', width: '100%' }}>
+      <div style={{ color: '#f8fafc', padding: '40px', textAlign: 'center', width: '100%', flex: 1 }}>
         <h2 style={{ marginBottom: '16px' }}>No data available. Please run an analysis.</h2>
         <Link to="/" style={btnStyle}>Return to Home</Link>
       </div>
@@ -35,8 +35,24 @@ export default function Results() {
   }
 
   return (
-    <div style={{ color: '#f8fafc', padding: '20px', minHeight: '100vh', width: '100%', alignSelf: 'flex-start' }}>
-      <h2 style={{ marginBottom: '16px' }}>📊 Analysis Results</h2>
+    <div style={{ color: '#f8fafc', padding: '16px 0', width: '100%', flex: 1, display: 'flex', flexDirection: 'column' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
+        <div 
+          style={{ 
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            width: '36px', height: '36px', borderRadius: '10px',
+            backgroundColor: 'rgba(56, 189, 248, 0.12)',
+            border: '1px solid rgba(56, 189, 248, 0.3)'
+          }}
+        >
+          <span className="material-symbols-outlined" style={{ color: '#38bdf8', fontSize: '22px' }}>
+            analytics
+          </span>
+        </div>
+        <h2 style={{ margin: 0, fontSize: '22px', fontWeight: '700', color: '#f8fafc' }}>
+          Analysis Results
+        </h2>
+      </div>
       <div style={{ display: 'flex', gap: '12px', marginBottom: '20px' }}>
         <button 
           onClick={() => navigate('/')} 
