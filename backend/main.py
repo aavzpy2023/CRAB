@@ -70,7 +70,8 @@ async def upload_fasta(file: UploadFile = File(...)):
     """
     Receives a .fasta file, parses it, and returns structured DTOs.
     """
-    if not file.filename.lower().endswith((".fasta", ".fa")):
+    valid_exts = (".fasta", ".fa", ".fna", ".ffn", ".faa", ".frn", ".txt")
+    if not file.filename.lower().endswith(valid_exts):
         raise HTTPException(status_code=400, detail="Invalid file extension")
     
     content = await file.read()

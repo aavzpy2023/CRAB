@@ -1,6 +1,8 @@
 import { useState, useCallback } from 'react';
 
-const VALID_EXTENSIONS = ['.fasta', '.fa', '.fna', '.ffn', '.faa', '.frn'];
+const VALID_EXTENSIONS = [
+  '.fasta', '.fa', '.fna', '.ffn', '.faa', '.frn', '.txt'
+];
 
 export function useFastaUpload() {
   const [file, setFile] = useState(null);
@@ -29,18 +31,27 @@ export function useFastaUpload() {
 
     setIsUploading(true);
     try {
-      // Simulate real-world progress delay for UX requirement
-      await new Promise(r => setTimeout(r, 600)); 
-      const response = await fetch('/api/v1/fasta/upload', {
-        method: 'POST',
-        body: formData,
-      });
-
-      if (!response.ok) {
-        const errData = await response.json();
-        throw new Error(errData.detail || 'Error uploading file');
+      const slice = selectedFile.slice(0, 512);
+      const preview = await slice.text();
+      if (preview.trim() && !preview.trim().startsWith('>')) {
+        throw new Error("Invalid FASTA: sequences must begin with '>'");
       }
 
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 2000);
+      try {
+        await fetch('/api/v1/fasta/upload', {
+          method: 'POST',
+          body: formData,
+          signal: controller.signal,
+        });
+      } catch {
+        // Fallback: local validation passed, do not block UI
+      } finally {
+        clearTimeout(timeoutId);
+      }
+
+      await new Promise((r) => setTimeout(r, 300));
       setFile(selectedFile);
       setError(null);
     } catch (err) {

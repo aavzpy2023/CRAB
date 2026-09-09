@@ -193,7 +193,7 @@ export function FastaUploadCard({
         <input
           ref={inputRef}
           type="file"
-          accept=".fasta,.fa,.fna,.ffn,.faa,.frn"
+          accept=".fasta,.fa,.fna,.ffn,.faa,.frn,.txt"
           style={styles.hiddenInput}
           onChange={handleInputChange}
           data-testid="fasta-file-input"
