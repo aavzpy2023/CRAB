@@ -12,9 +12,13 @@ export function useOrganismSelect(initialOrganism = '') {
                 const response = await fetch('/api/v1/models');
                 if (!response.ok) throw new Error('Network error');
                 const data = await response.json();
-                if (data.models && data.models.length > 0) {
-                    setOptions(data.models);
-                    setOrganism(data.models[0]);
+                const models = data.models || [];
+                if (models.length > 0) {
+                    setOptions(models);
+                    setOrganism(models[0]);
+                } else {
+                    setOptions(['No models found']);
+                    setOrganism('No models found');
                 }
             } catch (error) {
                 console.error("Failed to fetch models:", error);

@@ -43,7 +43,7 @@ export function OrganismCard({
   return (
     <div style={styles.card} data-testid="organism-card">
       <label htmlFor="organism-select" style={styles.label}>
-        🌱 Organism
+        🧠 Models
       </label>
       <select
         id="organism-select"
@@ -61,7 +61,7 @@ export function OrganismCard({
         ))}
       </select>
       <p style={styles.helperText}>
-        Select the target species to adjust prediction parameters.
+        Select the ML model file from the models directory.
       </p>
     </div>
   );
