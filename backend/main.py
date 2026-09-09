@@ -32,17 +32,12 @@ app = FastAPI(lifespan=lifespan)
 
 @app.get("/api/v1/models")
 def get_models():
-    """Scans the models directory and returns available model files."""
+    """Scans the models directory and returns available model names."""
     base_dir = Path(__file__).resolve().parent
     model_dir = base_dir / "app" / "models"
     if not model_dir.exists():
         return {"models": []}
-    ignored = {"__init__.py", ".gitkeep", "__pycache__"}
-    files = [
-        p.name for p in model_dir.iterdir()
-        if p.is_file() and p.name not in ignored and not p.name.startswith(".")
-    ]
-    return {"models": sorted(files)}
+    return {"models": sorted([p.stem for p in model_dir.glob("*.pkl")])}
 
 @app.get("/api/v1/fasta/sample", response_model=SampleFastaResponse)
 def get_sample_fasta():
@@ -113,8 +108,15 @@ async def run_inference(
 ):
     base_dir = Path(__file__).resolve().parent
     model_dir = base_dir / "app" / "models"
-    if organism and (model_dir / organism).is_file():
-        app.state.model = load_model(str(model_dir / organism))
+    selected = None
+    if organism:
+        for ext in ("", ".pkl", ".joblib"):
+            cand = model_dir / f"{organism}{ext}"
+            if cand.is_file():
+                selected = cand
+                break
+    if selected:
+        app.state.model = load_model(str(selected))
     elif not getattr(app.state, "model", None):
         candidates = list(model_dir.glob("*.pkl")) + list(model_dir.glob("*.joblib"))
         if candidates:

@@ -68,7 +68,7 @@ const Navbar = ({ currentView, setView }) => {
                   color: '#38bdf8', letterSpacing: '-0.02em'
                 }}
               >
-                CODING RNA ASSESSMENT IN BACTERIA
+                CRAB
               </span>
             </button>
 
@@ -90,7 +90,7 @@ const Navbar = ({ currentView, setView }) => {
 const Footer = () => (
   <footer style={styles.footer}>
   <p style={{ fontSize: '12px', color: '#64748b', margin: 0, textTransform: 'uppercase' }}>
-  Copyright © 2026 Laboratory of Integrative Bioinformatics - University of Chile
+  Copyright © 2026 Programming RNA Lab - Universidad Tecnológica Metropolitana
   </p>
   </footer>
 );
