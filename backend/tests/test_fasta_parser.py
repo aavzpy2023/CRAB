@@ -20,7 +20,7 @@ def test_strict_fasta_check_missing_header():
 
 def test_extract_3mers_normalized_list():
     """Assert extract_3mers returns exactly a 64-element normalized list."""
-    seq = "AUGCGA"  # length 6, generates 4 kmers: AUG, UGC, GCG, CGA
+    seq = "ATCGCT"  # DNA codons: ATC, GCT
     features = extract_3mers(seq)
     
     assert len(features) == 64
