@@ -12,7 +12,7 @@ export const useTableLogic = (initialData = []) => {
     const [sort, setSort] = useState({ key: null, direction: 'asc' });
     const [currentPage, setPage] = useState(1);
     
-    const ITEMS_PER_PAGE = 40;
+    const ITEMS_PER_PAGE = 20;
 
     const processedData = useMemo(() => {
         let data = [...initialData];

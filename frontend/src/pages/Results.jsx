@@ -14,7 +14,7 @@ const isNonCodingRecord = (item) => {
   return cls.includes('ncrna') || cls.includes('non');
 };
 
-export default function Results() {
+export default function Results({ onReset }) {
   const location = useLocation();
   const navigate = useNavigate();
   const data = location.state?.data || [];
@@ -55,7 +55,10 @@ export default function Results() {
       </div>
       <div style={{ display: 'flex', gap: '12px', marginBottom: '20px' }}>
         <button 
-          onClick={() => navigate('/')} 
+          onClick={() => {
+            if (typeof onReset === 'function') onReset();
+            navigate('/');
+          }} 
           style={{ ...btnStyle, backgroundColor: '#10b981' }}
         >
           New Analysis

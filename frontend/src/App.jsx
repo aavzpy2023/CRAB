@@ -223,7 +223,19 @@ function App() {
       {currentView === 'contact' && <Contact />}
           </>
         } />
-        <Route path="/results" element={<Results />} />
+        <Route 
+          path="/results" 
+          element={
+            <Results 
+              onReset={() => {
+                fastaUpload.clearFile();
+                if (analysisRunner.resetAnalysis) {
+                  analysisRunner.resetAnalysis();
+                }
+              }} 
+            />
+          } 
+        />
       </Routes>
       </main>
 
