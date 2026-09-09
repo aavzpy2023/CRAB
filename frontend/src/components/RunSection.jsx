@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const styles = {
@@ -45,6 +45,7 @@ const createUnifiedData = (text, apiResult) => {
 export const RunSection = ({ isRunning, disabled, onClick, result, file }) => {
     const navigate = useNavigate();
     const wasRunningRef = useRef(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     useEffect(() => {
         if (wasRunningRef.current && !isRunning && result && file) {
@@ -90,8 +91,209 @@ export const RunSection = ({ isRunning, disabled, onClick, result, file }) => {
     )}
     </button>
     <p style={{ fontSize: '13px', color: '#94a3b8', marginTop: '12px' }}>
-    Example of results are made available <a href="#" style={{ color: '#38bdf8', textDecoration: 'underline' }}>here</a>.
+      Example of results are made available{' '}
+      <button
+        type="button"
+        onClick={() => setIsModalOpen(true)}
+        style={{
+          color: '#38bdf8',
+          textDecoration: 'underline',
+          background: 'none',
+          border: 'none',
+          padding: 0,
+          cursor: 'pointer',
+          fontSize: '13px'
+        }}
+      >
+        here
+      </button>
+      .
     </p>
+
+    {isModalOpen && (
+      <div
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: 'rgba(15, 23, 42, 0.9)',
+          backdropFilter: 'blur(8px)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 1000,
+        }}
+        onClick={() => setIsModalOpen(false)}
+      >
+        <div
+          style={{
+            backgroundColor: '#1e293b',
+            borderRadius: '16px',
+            padding: '24px',
+            maxWidth: '750px',
+            width: '90%',
+            maxHeight: '85vh',
+            overflowY: 'auto',
+            border: '1px solid #334155',
+            boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
+            textAlign: 'left'
+          }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div 
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              marginBottom: '16px'
+            }}
+          >
+            <h3 style={{ margin: 0, color: '#f8fafc', fontSize: '18px' }}>
+              📊 Example Prediction Results (.fasta)
+            </h3>
+            <span style={{ fontSize: '12px', color: '#94a3b8' }}>
+              Cutoff Threshold: 0.4629
+            </span>
+          </div>
+
+          {/* Box 1: ncRNA */}
+          <div style={{ marginBottom: '16px' }}>
+            <div 
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                marginBottom: '6px'
+              }}
+            >
+              <span 
+                style={{
+                  height: '8px',
+                  width: '8px',
+                  borderRadius: '50%',
+                  backgroundColor: '#f59e0b'
+                }}
+              />
+              <strong style={{ fontSize: '13px', color: '#cbd5e1' }}>
+                ncRNA.fasta (non-coding)
+              </strong>
+            </div>
+            <pre
+              style={{
+                backgroundColor: '#0f172a',
+                color: '#38bdf8',
+                padding: '12px',
+                borderRadius: '8px',
+                fontSize: '12px',
+                fontFamily: 'monospace',
+                overflowX: 'auto',
+                whiteSpace: 'pre-wrap',
+                maxHeight: '150px',
+                border: '1px solid #334155',
+                margin: 0
+              }}
+            >
+{`>NGAF01000006.1/2237-1938 prediction=ncRNA prob=0.0658
+ACGGAGGGGCGGAAGGCCAAGATCGAAACGGAAGAGAAGGTTCGATCTCCCATCCGCACT
+TCCCAGCACGGACGCCAGGCACCCACGCGGAGCGCGCCGCGACAAGGGCAGAAGCGTTGT
+GGGCCTGCGAAATTCGAATTCACGTCGGCAATGGCCTCGCACAGGTTGCGGGGATGAACC
+GGCGGGGTGCGGATGATCGCCGAGGCCGCAGAACACAACCCGACAAGCACGCTTGGTAAC
+CGGGTAGTCCGTGCTAGCGGGCGGTGAGGCCGACGACGGCTACGCCGCCCGCTTCGATGT
+
+>CP003053.1/5021204-5021515 prediction=ncRNA prob=0.0257
+ACGGAAGCCGGGTGAGGCCAAGACCGAACCGGAAGAGAAGGTTCGGCCTCCCGACCTCGG
+CTCCTAGCACGGGTCCCGGAACCCACGCGGAGCACACGCCGCGGAATAGGCAAAAGCGTT
+GCGGGCCTGCGTTATTGCGAAAATCGAACGACCATGTCAGCCCTTTGGGTGGGGTTGGTG
+TCGTAGCGTTTCGCAGTCACGCCGAGGCCAACCCACGCAACCCACAACGCACGCTTGGTA
+ACCGGAGCCCCGTGCTAGCGGGCGGCGAACCGCAGTTGTCTCGGCAACTCGGGTCGCCGC
+CCGTTTTGCCGT`}
+            </pre>
+          </div>
+
+          {/* Box 2: coding_protein */}
+          <div style={{ marginBottom: '20px' }}>
+            <div 
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                marginBottom: '6px'
+              }}
+            >
+              <span 
+                style={{
+                  height: '8px',
+                  width: '8px',
+                  borderRadius: '50%',
+                  backgroundColor: '#22c55e'
+                }}
+              />
+              <strong style={{ fontSize: '13px', color: '#cbd5e1' }}>
+                coding_protein.fasta (coding)
+              </strong>
+            </div>
+            <pre
+              style={{
+                backgroundColor: '#0f172a',
+                color: '#4ade80',
+                padding: '12px',
+                borderRadius: '8px',
+                fontSize: '12px',
+                fontFamily: 'monospace',
+                overflowX: 'auto',
+                whiteSpace: 'pre-wrap',
+                maxHeight: '150px',
+                border: '1px solid #334155',
+                margin: 0
+              }}
+            >
+{`>SMKY01000176.1/1024-430 prediction=coding_protein prob=0.9194
+ATGAGGGTGGTGCTGGTGCGGTGCAGAAAGTCGGTGCGGGCGTTTCGGACCTTGCGGCAG
+GTGCGGGCGACCTTGTTCTTGGCCTTGCGGCAGTTGGCCGAACCGCGCTGCTTGCGGGCC
+ATCCGCCGCTGGTGCCGGGCCAGATTCGTCGCCCTGCGCTCCAGATGGCGGGGGTTGGCA
+ATCCGGTCCCCGTCCGAGGTGACCGCGAATTCCTTCACCCCCAGGTCGATGCCGATGGCG
+TGCCCAGTGGCCGGCAGCGGGTCAGGGGCGTCGGTGTCGACGGCGAAGGTGACGTACCAG
+CGGCCGTCCGCCTCCCGCGACACCACCACCATCGTCGGATTCAACCCGGCCAGATCCACA
+TCCTCAAACGACCACACCAGCGCAAGCGGCGCGGTCGTTTTGGCCATCCACAACTCCCCG
+CCTTTCATCCGGAACGCCGAGCGAGTGTAATGCGCCGTCTGCCGTCCGGTGCGGGACTTG
+AATCTCGGGTGGCGGGCCCGTCCGGCGAAGAAGTTGGCGAATGCGGCGTGCTGGTGCCGC
+AGCGTCTGCTGTAACGGAACCGAGGACACCTCCGATAGGAACGCCAACTCCTCGG
+
+>JACJIA010000009.1/120774-121367 prediction=coding_protein prob=0.5890
+ACCAGCCGCGTGCTGGTGCGGTGCGGGAAATCCCGGCGGGCGTCGCGGACCTTGCGGTGT
+GCGCGGGCGACCTTGGCCTTGGTCTTGGTCCGGTTGTGGGAGCCGCGCTGTTTGCGGGCC
+ATGCGCCGCTGGTAGCGGGCCAGATTGCGGGCCTTGCGCTCCAGGTGACGCGGATTTGCG
+ATCTTCTCGCCGGTGGACAGGACCGCGAAATCGCTCACGCCCACATCGACGCCGACCGCC
+GCGCCGGTGGTGGGCGGCGGCTCGGGGTCGGCGGTGGTCTCCACCGCCAGGGAGGCATAC
+CAGCGGCCATCGGGGTCTCGGGAGATCGTCACCGTGGTCGGGGTCAGGGTGGCCGGGTCG
+ATGCCGGGCCAGGACCACGCGAACGCAAGCGGGCCCTCGGTCTTCGCCAGGTGCAGCCGC
+CCGCCCTTCCATCGGAACGCCGAGCGGGTGCAGGTCGCCGACTGGCGGCCGTGCCGGGTC
+TTGTGGCGGGGGTAGCGGGCGCGTCCGGCGAAGAAGTTCACGAACGCGGTGTATTGGTGC
+CGCAGGGCCTGCTGCAACGGGACCGAGGACACCTCGTACAGGAAGTCGTGGCTG`}
+            </pre>
+          </div>
+
+          <button
+            type="button"
+            onClick={() => setIsModalOpen(false)}
+            style={{
+              width: '100%',
+              padding: '10px',
+              backgroundColor: '#334155',
+              color: '#f8fafc',
+              border: 'none',
+              borderRadius: '8px',
+              cursor: 'pointer',
+              fontWeight: '600'
+            }}
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    )}
     </section>
     );
 };

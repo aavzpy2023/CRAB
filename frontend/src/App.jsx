@@ -107,7 +107,7 @@ const Navbar = ({ currentView, setView }) => {
                     marginTop: '2px'
                   }}
                 >
-                  Coding RNA Analysis Benchmark
+                  Coding RNA Analysis in Bacteria
                 </span>
               </div>
             </button>
