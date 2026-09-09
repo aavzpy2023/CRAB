@@ -89,9 +89,9 @@ export const ResultsTable = ({ data, searchHandlers, paginationHandlers }) => {
             <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', tableLayout: 'fixed' }}>
                 <thead>
                     <tr>
-                        <th style={{ ...thStyle, width: '33%' }}>Sequence ID</th>
-                        <th style={{ ...thStyle, width: '33%' }}>Coding Potential</th>
-                        <th style={{ ...thStyle, width: '33%' }}>Probability</th>
+                        <th style={{ ...thStyle, width: '60%' }}>Sequence ID</th>
+                        <th style={{ ...thStyle, width: '20%' }}>Coding Potential</th>
+                        <th style={{ ...thStyle, width: '20%' }}>Probability</th>
                     </tr>
                 </thead>
                 <tbody>
