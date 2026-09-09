@@ -1,6 +1,6 @@
 import pytest
 from fastapi.testclient import TestClient
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock, patch, ANY
 from main import app
 
 client = TestClient(app)
@@ -40,4 +40,4 @@ def test_predict_endpoint_success(mock_model):
         assert data["results"][0]["probability"] == 0.47
         assert data["results"][0]["sequence"] == "ACGU"
         assert data["results"][0]["classification"] == "coding"
-        mock_extract.assert_called_once_with("ACGU")
+        mock_extract.assert_called_once_with("ACGU", ANY)
