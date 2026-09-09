@@ -51,9 +51,7 @@ export function OrganismCard({
         onChange={(e) => onOrganismChange(e.target.value)}
         style={styles.select}
         data-testid="organism-select"
-        disabled={isLoading}
       >
-        {isLoading && <option>Loading models...</option>}
         {organismOptions.map((org) => (
           <option key={org} value={org}>
             {org}

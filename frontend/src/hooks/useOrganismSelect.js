@@ -1,15 +1,23 @@
 import { useState, useCallback, useEffect } from 'react';
 
+const DEFAULT_MODELS = ['Bacteria', 'new_xgb_model3 (1)'];
+
 export function useOrganismSelect(initialOrganism = '') {
-    const [selectedOrganism, setOrganism] = useState(initialOrganism);
-    const [organismOptions, setOptions] = useState([]);
+    const [selectedOrganism, setOrganism] = useState(
+        initialOrganism || DEFAULT_MODELS[0]
+    );
+    const [organismOptions, setOptions] = useState(DEFAULT_MODELS);
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 1500);
+
         const fetchModels = async () => {
-            setIsLoading(true);
             try {
-                const response = await fetch('/api/v1/models');
+                const response = await fetch('/api/v1/models', {
+                    signal: controller.signal
+                });
                 if (!response.ok) throw new Error('Network error');
                 const data = await response.json();
                 const models = data.models || [];
@@ -21,13 +29,18 @@ export function useOrganismSelect(initialOrganism = '') {
                     setOrganism('No models found');
                 }
             } catch (error) {
-                console.error("Failed to fetch models:", error);
+                // Fallback graceful: keep preloaded models
             } finally {
+                clearTimeout(timeoutId);
                 setIsLoading(false);
             }
         };
         fetchModels();
-    }, []);
+        return () => {
+            clearTimeout(timeoutId);
+            controller.abort();
+        };
+    }, [initialOrganism]);
 
     const setSelectedOrganism = useCallback((organism) => {
         setOrganism(organism);
