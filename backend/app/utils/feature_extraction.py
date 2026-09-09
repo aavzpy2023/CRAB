@@ -9,10 +9,10 @@ def extract_3mers(
 ) -> List[float]:
     """
     Extracts and normalizes trinucleotide frequencies into a 64-element list.
-    Standardizes sequence to uppercase DNA (U -> T).
+    Bug-for-bug legacy compatibility: does NOT convert U to T.
     """
     keys = kmer_keys or KMER_KEYS
-    seq = sequence.upper().replace('U', 'T')
+    seq = sequence.upper()
     counts = {k: 0.0 for k in keys}
     trinucs = [seq[i:i + 3] for i in range(0, len(seq) - 2, 3)]
     total = len(trinucs)
