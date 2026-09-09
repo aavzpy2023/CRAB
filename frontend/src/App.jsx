@@ -60,16 +60,56 @@ const Navbar = ({ currentView, setView }) => {
               <img 
                 src="/src/assets/logo.ico" 
                 alt="CRAB Icon" 
-                style={{ height: '24px' }} 
-              />
-              <span 
                 style={{
-                  fontSize: '22px', fontWeight: '700',
-                  color: '#38bdf8', letterSpacing: '-0.02em'
+                  height: '32px',
+                  width: '32px',
+                  filter: 'drop-shadow(0 0 8px rgba(56, 189, 248, 0.45))'
+                }} 
+              />
+              <div 
+                style={{
+                  display: 'flex', flexDirection: 'column',
+                  alignItems: 'flex-start', textAlign: 'left'
                 }}
               >
-                CRAB
-              </span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <span 
+                    style={{
+                      fontSize: '22px', fontWeight: '800',
+                      background: 'linear-gradient(135deg, #38bdf8 0%, #818cf8 100%)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      letterSpacing: '0.02em',
+                      lineHeight: 1
+                    }}
+                  >
+                    CRAB
+                  </span>
+                  <span 
+                    style={{
+                      fontSize: '10px', fontWeight: '700',
+                      color: '#38bdf8',
+                      backgroundColor: 'rgba(2, 132, 199, 0.2)',
+                      border: '1px solid rgba(56, 189, 248, 0.35)',
+                      padding: '1px 6px',
+                      borderRadius: '6px',
+                      letterSpacing: '0.05em'
+                    }}
+                  >
+                    AI ENGINE
+                  </span>
+                </div>
+                <span 
+                  style={{
+                    fontSize: '10px', fontWeight: '600',
+                    color: '#94a3b8', letterSpacing: '0.08em',
+                    textTransform: 'uppercase',
+                    marginTop: '2px'
+                  }}
+                >
+                  Coding RNA Analysis Benchmark
+                </span>
+              </div>
             </button>
 
     {/* Menú reordenado por flujo UX */}
