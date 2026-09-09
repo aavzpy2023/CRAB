@@ -49,7 +49,7 @@ export default function Results() {
           style={{ ...btnStyle, ...(validData.length === 0 ? disabledBtnStyle : {}) }}
           disabled={validData.length === 0}
         >
-          Export All (ZIP)
+          Download All (ZIP)
         </button>
         <button 
           onClick={() => exportCoding(validData)} 

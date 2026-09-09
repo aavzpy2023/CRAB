@@ -56,7 +56,7 @@ export const useFastaExport = () => {
         zip.file('coding_protein.fasta', generateFastaText(codingData));
         zip.file('ncRNA.fasta', generateFastaText(nonCodingData));
         const zipBlob = await zip.generateAsync({ type: 'blob' });
-        saveAs(zipBlob, 'predictions_fasta.zip');
+        saveAs(zipBlob, 'predictions.zip');
     }, []);
 
     const isCoding = (d) => {

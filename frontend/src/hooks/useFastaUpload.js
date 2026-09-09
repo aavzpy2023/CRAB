@@ -1,8 +1,6 @@
 import { useState, useCallback } from 'react';
 
-const VALID_EXTENSIONS = [
-  '.fasta', '.fa', '.fna', '.ffn', '.faa', '.frn', '.txt'
-];
+const VALID_EXTENSIONS = ['.fasta', '.fa', '.fna', '.ffn', '.faa', '.frn'];
 
 export function useFastaUpload() {
   const [file, setFile] = useState(null);
