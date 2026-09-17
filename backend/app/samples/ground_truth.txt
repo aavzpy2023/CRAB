@@ -1,5 +1,0 @@
-Sequence_ID,Label
-at3g03625,non-coding
-AT1G20210.1,non-coding
-AT1G32980.1,coding
-AT1G78240.1,coding

@@ -67,3 +67,10 @@
 
 - [x] [REQ-031] Implement self-contained Python CLI script for offline FASTA inference.
 - [x] [REQ-032] Provide documentation for standalone script usage and dependencies.
+
+## Download Page Static Bundles (EPIC 12)
+
+[Roadmap: roadmap_12_download_page_updates.md](roadmap_12_download_page_updates.md)
+
+- [ ] [REQ-033] Download UI Fractality (TDE-First & Dumb View).
+- [ ] [REQ-034] Python Bundler (TDE-First & Implementation).
