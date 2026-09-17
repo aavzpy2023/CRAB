@@ -1,6 +1,7 @@
 import argparse
 import itertools
 import sys
+import warnings
 from pathlib import Path
 
 import joblib
@@ -43,7 +44,9 @@ def run_inference(records: list[tuple[str, str]], model_path: str) -> list[dict]
     df = pd.DataFrame(features_list, columns=kmers)
 
     print(f"[*] Loading model from {model_path}...")
-    model = joblib.load(model_path)
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore", category=UserWarning)
+        model = joblib.load(model_path)
     dmatrix = xgb.DMatrix(df)
     
     print("[*] Running inference...")
