@@ -72,7 +72,21 @@ uvicorn app.main:app --reload --port 8000
 cd frontend
 npm install
 npm run dev
+```
 
+### Standalone CLI (Offline Execution)
+
+For high-performance computing (HPC) environments or offline processing, 
+use the standalone Python CLI provided in the `standalone.zip` bundle 
+(available via the web platform's Downloads section).
+
+```bash
+unzip standalone.zip -d crab_cli
+cd crab_cli
+pip install -r requirements.txt
+
+python cli.py --input sequences.fasta --output predictions.csv
+```
 
 ## 🛡️ API Endpoints
 
@@ -80,5 +94,5 @@ npm run dev
 * `POST /api/inference`: Multipart file upload with direct batch XGBoost inference.
 * `POST /api/v1/fasta/upload`: FASTA syntax check and stream DTO parsing.
 * `POST /api/v1/fasta/predict`: DTO-based batch inference pipeline.
-* `GET  /api/v1/fasta/sample`: Benchmark sample FASTA sequences.
+* `GET /api/v1/fasta/sample`: Benchmark sample FASTA sequences.
 ```

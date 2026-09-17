@@ -218,8 +218,8 @@ export default function Download() {
         </p>
 
         <ul style={{ color: '#94a3b8', fontSize: '13px', lineHeight: '1.8', marginBottom: '20px', paddingLeft: '20px' }}>
-        <li><strong>sample_human.fasta</strong> (10 sequences)</li>
-        <li><strong>sample_mouse.fasta</strong> (10 sequences)</li>
+        <li><strong>coding.fasta</strong> (2 sequences)</li>
+        <li><strong>non_coding.fasta</strong> (2 sequences)</li>
         </ul>
 
         {/* Botón visual que los usuarios pueden usar para descargar los archivos de prueba en el futuro */}
