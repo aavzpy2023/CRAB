@@ -72,5 +72,5 @@
 
 [Roadmap: roadmap_12_download_page_updates.md](roadmap_12_download_page_updates.md)
 
-- [ ] [REQ-033] Download UI Fractality (TDE-First & Dumb View).
+- [x] [REQ-033] Download UI Fractality (TDE-First & Dumb View).
 - [x] [REQ-034] Python Bundler (TDE-First & Implementation).

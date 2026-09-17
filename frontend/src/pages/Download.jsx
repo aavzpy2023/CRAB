@@ -1,5 +1,10 @@
 import React from 'react';
 
+const DOWNLOAD_ASSETS = {
+    standalone: "/standalone.zip",
+    samples: "/samples.zip"
+};
+
 // ==========================================
 // STYLES (Identical sizing and layout as other pages)
 // ==========================================
@@ -178,26 +183,24 @@ export default function Download() {
         <div style={styles.cardHeader}>
         <span className="material-symbols-outlined" style={styles.cardIcon}>code</span>
         <div>
-        <h3 style={styles.name}>Source Code (GitHub)</h3>
-        <p style={styles.role}>Complete Stack & Models</p>
+        <h3 style={styles.name}>Standalone CLI</h3>
+        <p style={styles.role}>Offline Script Execution</p>
         </div>
         </div>
         <p style={styles.cardBody}>
-        The repository includes the FastAPI backend, the React frontend, pre-trained ML models, and Docker Compose configurations for a one-click local deployment.
+        Run the standalone Python CLI script for offline FASTA inference locally on your own machine without relying on the web platform.
         </p>
 
-        <div style={styles.codeBlock}>
-        git clone https://github.com/aavzpy2023/RNAmining.git
-        </div>
+        {/* CLI Download Link */}
 
         <a
-        href="https://github.com/aavzpy2023/RNAmining/"
-        target="_blank"
+        href={DOWNLOAD_ASSETS.standalone}
+        download="standalone.zip"
         rel="noopener noreferrer"
         style={styles.actionBtn}
         >
-        <span className="material-symbols-outlined">open_in_new</span>
-        View on GitHub
+        <span className="material-symbols-outlined">download</span>
+        Download CLI
         </a>
         </article>
 
@@ -220,10 +223,14 @@ export default function Download() {
         </ul>
 
         {/* Botón visual que los usuarios pueden usar para descargar los archivos de prueba en el futuro */}
-        <button style={styles.secondaryBtn}>
+        <a
+        href={DOWNLOAD_ASSETS.samples}
+        download="samples.zip"
+        style={styles.secondaryBtn}
+        >
         <span className="material-symbols-outlined">download</span>
         Download Sample Data
-        </button>
+        </a>
         </article>
 
         </div>

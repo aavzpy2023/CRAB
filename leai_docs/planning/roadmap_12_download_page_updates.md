@@ -22,7 +22,8 @@ complexity_aggregate: "MEDIUM"
   - [ID-12.1.3] [CORE/WIRING]: [1. Add execution block if __name__ == "__main__": to build_samples_zip.py to run the function. 2. Move ./standalone.zip from project root to frontend/public/standalone.zip (OS-level wiring)]. Type: Task.
   - [ID-12.1.4] [PLANNING/SYNC]: [1. Open leai_docs/planning/roadmap_12_download_page_updates.md and check - [x] for Story 12.1. 2. Append > Files touched: [list of modified/read files]. 3. Open leai_docs/planning/global_backlog.md and check - [x] for [REQ-034]]. Type: Task.
 
-- [ ] Story 12.2: Download UI Fractality (TDE-First & Dumb View) | [MoSCoW: MUST] | [Complexity: EASY] (<-- REQ-033)
+- [x] Story 12.2: Download UI Fractality (TDE-First & Dumb View) | [MoSCoW: MUST] | [Complexity: EASY] (<-- REQ-033)
+  > Files touched: frontend/src/pages/Download.jsx, frontend/src/pages/__tests__/Download.test.jsx, context.md
   Story Context Radius: {"frontend/src/pages/Download.jsx": [""], "frontend/src/pages/tests/Download.test.jsx": [""], "context.md": [""], "leai_docs/planning/roadmap_12_download_page_updates.md": [""], "leai_docs/planning/global_backlog.md": ["*"]}
   Layered Technical Breakdown (FLASH-COMPATIBLE ALGORITHMS):
   - [ID-12.2.1] [TESTING/TDE]: [1. Arrange: Open/Create frontend/src/pages/__tests__/Download.test.jsx. Render <Download /> using React Testing Library. 2. Act: Query the new "Standalone CLI" and "Sample Datasets" links by their role. 3. Assert: Expect the href attributes to exactly match /standalone.zip and /samples.zip and strictly check for the download attribute]. Type: Task.
