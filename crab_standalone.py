@@ -126,6 +126,17 @@ def parse_fasta_file(filepath: str):
             yield header, seq
 
 
+def export_csv(results: list[dict], output_dir: str):
+    """Exports inference results to predictions.csv in the given directory."""
+    out_path = Path(output_dir)
+    out_path.mkdir(parents=True, exist_ok=True)
+    csv_path = out_path / "predictions.csv"
+    
+    df = pd.DataFrame(results)
+    df.to_csv(csv_path, index=False)
+    print(f"[*] Results successfully written to {csv_path}")
+
+
 def main():
     try:
         args = setup_argparse()
@@ -137,7 +148,7 @@ def main():
         results = run_inference(records, args.model)
         print(f"[*] Inference completed for {len(results)} sequences.")
 
-        # Pending: CSV Export (Story 11.3)
+        export_csv(results, args.output)
 
     except Exception as e:
         print(f"Error: {e}", file=sys.stderr)

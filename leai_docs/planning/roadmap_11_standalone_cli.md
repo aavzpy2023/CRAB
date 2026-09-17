@@ -31,7 +31,8 @@ complexity_aggregate: "MEDIUM"
   - [ID-11.2.2] [CORE/INFERENCE]: [1. In crab_standalone.py, implement run_inference(records, model_path). 2. Load model via joblib.load(model_path). 3. Construct pd.DataFrame and xgb.DMatrix, run .predict(), and return a list of dictionaries with prob and classification (threshold 0.4629 -> "coding_protein" / "ncRNA")]. Type: Task.
   - [ID-11.2.3] [PLANNING/SYNC]: [1. Open leai_docs/planning/roadmap_11_standalone_cli.md and check - [x] for Story 11.2. 2. Append > Files touched: crab_standalone.py under the story]. Type: Task.
 
-- [ ] Story 11.3: CSV Export & Script Integration Testing | [MoSCoW: MUST] | [Complexity: MEDIUM]
+- [x] Story 11.3: CSV Export & Script Integration Testing | [MoSCoW: MUST] | [Complexity: MEDIUM]
+  > Files touched: crab_standalone.py, backend/tests/test_standalone.py
   Business Requirement: Write the predictions to a CSV in the specified output directory and ensure the script operates deterministically.
   Story Context Radius: {"crab_standalone.py": ["*"], "backend/tests/test_standalone.py": ["*"], "leai_docs/planning/roadmap_11_standalone_cli.md": ["*"]}
   Layered Technical Breakdown:
