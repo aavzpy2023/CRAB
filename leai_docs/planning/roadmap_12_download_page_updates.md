@@ -13,7 +13,8 @@ complexity_aggregate: "MEDIUM"
   Layered Technical Breakdown:
   - [ID-12.0.1] [PLANNING/INIT]: [1. Create leai_docs/planning/ directory if missing. 2. Append EPIC 12, its [REQ-033] and [REQ-034] list, and the Roadmap link to leai_docs/planning/global_backlog.md. 3. Write THIS ENTIRE raw markdown response (INCLUDING the YAML Frontmatter block above) into leai_docs/planning/roadmap_12_download_page_updates.md]. Type: Task.
 
-- [ ] Story 12.1: Python Bundler (TDE-First & Implementation) | [MoSCoW: MUST] | [Complexity: EASY] (<-- REQ-034)
+- [x] Story 12.1: Python Bundler (TDE-First & Implementation) | [MoSCoW: MUST] | [Complexity: EASY] (<-- REQ-034)
+  > Files touched: _scripts/dev/build_samples_zip.py, backend/tests/test_build_samples_zip.py
   Story Context Radius: {"_scripts/dev/build_samples_zip.py": [""], "tests/test_standalone.py": ["READONLY"], "frontend/public/": [""], "standalone.zip": ["*"]}
   Layered Technical Breakdown (FLASH-COMPATIBLE ALGORITHMS):
   - [ID-12.1.1] [TESTING/TDE]: [1. Arrange: Create a Python test function using unittest.mock. Mock the OS filesystem to simulate backend/app/samples/sample.txt and sample.fasta. 2. Act: Invoke the yet-to-be-created create_samples_zip() function. 3. Assert: Verify zipfile.ZipFile is called with frontend/public/samples.zip and the correct file paths]. Type: Task.
