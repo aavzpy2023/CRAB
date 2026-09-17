@@ -1,35 +1,41 @@
-# CRAB Standalone CLI
+# CRAB Standalone CLI: Offline RNA/DNA Classification
 
-The `crab_standalone.py` script is a fully isolated, portable Python tool designed for researchers who wish to run the RNA/DNA classification model offline without deploying the full web application.
+The `crab_standalone.py` module is a fully isolated, portable Python tool designed for bioinformatics researchers. It enables the execution of the CRAB (Classification of RNA/DNA) machine learning models offline, facilitating bulk sequence processing and ensuring reproducible research without the need to deploy the full web-based infrastructure.
 
-## Prerequisites
+## Prerequisites & Installation
 
-Ensure you have Python 3.9+ installed. You will need to install the required data science packages. 
+Ensure you have Python 3.9+ installed. To guarantee algorithmic reproducibility, the following scientific packages must be installed:
 
-Run the following command in your terminal:
 ```bash
 pip install pandas xgboost joblib
-Usage
+## Usage
 
-The script takes three main arguments:
+The Command-Line Interface (CLI) is invoked via the terminal. It requires an input FASTA file and an output directory.
 
--p or --path: (Required) Path to your input FASTA file.
+### Command-Line Arguments
 
--o or --output: (Required) Directory where the predictions.csv will be saved.
+* `-p` / `--path`: **(Required)** Absolute or relative path to the input sequence file in FASTA format.
 
--m or --model: (Optional) Path to the pre-trained XGBoost model. Defaults to Bacteria.pkl.
+* `-o` / `--output`: **(Required)** Target directory where the analytical results will be saved.
+* `-m` / `--model`: **(Optional)** Path to the pre-trained XGBoost model artifact (`.pkl`). Defaults to `Bacteria.pkl`.
 
 Example Command
 ```
 Bash
 ```
 python crab_standalone.py -p input.fasta -o ./output/ -m Bacteria.pkl
-Features
+## Methodology & Features
 
-Zero-Dependencies on Web Core: This script does not require FastAPI, Pydantic, or any of the backend web server libraries.
+* **Zero-Dependency Architecture**: Designed for computational clusters and air-gapped laboratory environments. It operates independently of web server dependencies (e.g., FastAPI, Pydantic).
+* **Algorithmic Sequence Normalization**: Automatically standardizes nucleotide sequences, converting RNA Uracil (`U`) to DNA Thymine (`T`). This ensures vector compatibility with models strictly trained on DNA representations.
+* **Non-Overlapping Codon Extraction**: Strictly parses sequences using a non-overlapping codon sliding window (`step=3`), preserving the exact mathematical trinucleotide distribution required by the legacy XGBoost pipeline.
 
-Auto-Normalization: Automatically converts RNA sequences (U) to DNA (T) to ensure compatibility with the legacy XGBoost models.
+    * **Multi-line FASTA Handling**: Safely parses and concatenates multi-line biological sequences per standard bioinformatics conventions.
 
-Multi-line Sequence Handling: Automatically parses and merges multi-line sequences found in standard biological FASTA formats.
+## Output Specification
 
-* **CSV Export**: Deterministically exports an easy-to-read CSV with headers `seq_id`, `probabilidad_coding`, and `prediccion_label`.
+The script deterministically exports an analytical CSV file (`predictions.csv`) into the designated output directory. The output contains the following structural columns:
+
+* `seq_id`: The primary identifier extracted from the FASTA header.
+* `probabilidad_coding`: The probabilistic confidence score (0.0 to 1.0) calculated by the XGBoost algorithm, rounded to 4 decimal places.
+* `prediccion_label`: The binary classification assignment (`coding_protein` or `ncRNA`) based on the statistically optimal threshold (`0.4629`).
