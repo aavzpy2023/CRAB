@@ -60,3 +60,10 @@
 ## RNA Biological Accuracy & Legacy Bias Correction (EPIC 10)
 
 - [x] [REQ-030] Normalize RNA sequences to DNA (U -> T) to prevent zero-vectors and correct legacy XGBoost nucleotide blindness.
+
+## Standalone Researcher CLI (EPIC 11)
+
+[Roadmap: roadmap_11_standalone_cli.md](roadmap_11_standalone_cli.md)
+
+- [ ] [REQ-031] Implement self-contained Python CLI script for offline FASTA inference.
+- [ ] [REQ-032] Provide documentation for standalone script usage and dependencies.

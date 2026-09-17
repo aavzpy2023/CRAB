@@ -3,7 +3,6 @@ from typing import List, Optional
 BASES = ['A', 'C', 'G', 'T']
 KMER_KEYS = [''.join(p) for p in itertools.product(BASES, repeat=3)]
 
-def extract_3mers(
 def extract_3mers(sequence: str, kmer_keys: Optional[List[str]]=None) -> List[float]:
     """
     Extracts and normalizes trinucleotide frequencies into a 64-element list.
@@ -21,4 +20,3 @@ def extract_3mers(sequence: str, kmer_keys: Optional[List[str]]=None) -> List[fl
         if kmer in counts:
             counts[kmer] += 1.0
     return [counts[k] / total for k in keys]
-    return [counts[k] / total for k in KMER_KEYS]
