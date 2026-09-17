@@ -16,20 +16,24 @@ def generate_kmers() -> list[str]:
 
 
 def extract_features(sequence: str, kmers: list[str]) -> dict[str, float]:
-    """Counts overlapping 3-mers in sequence and strictly normalizes them."""
+    """Counts non-overlapping 3-mers (codons) and strictly normalizes them."""
     counts = {k: 0.0 for k in kmers}
     seq_len = len(sequence)
     if seq_len < 3:
         return counts
 
-    for i in range(seq_len - 2):
-        kmer = sequence[i : i + 3]
+    trinucs = [sequence[i : i + 3] for i in range(0, seq_len - 2, 3)]
+    total = len(trinucs)
+    
+    if total == 0:
+        return counts
+
+    for kmer in trinucs:
         if kmer in counts:
             counts[kmer] += 1.0
 
-    denominator = seq_len - 2
     for k in counts:
-        counts[k] /= denominator
+        counts[k] /= total
 
     return counts
 
