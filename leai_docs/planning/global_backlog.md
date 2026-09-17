@@ -65,5 +65,5 @@
 
 [Roadmap: roadmap_11_standalone_cli.md](roadmap_11_standalone_cli.md)
 
-- [ ] [REQ-031] Implement self-contained Python CLI script for offline FASTA inference.
-- [ ] [REQ-032] Provide documentation for standalone script usage and dependencies.
+- [x] [REQ-031] Implement self-contained Python CLI script for offline FASTA inference.
+- [x] [REQ-032] Provide documentation for standalone script usage and dependencies.

@@ -40,8 +40,10 @@ complexity_aggregate: "MEDIUM"
   - [ID-11.3.2] [TESTING/TDE]: [1. Arrange: In backend/tests/test_standalone.py, mock sys.argv to pass fake paths, mock joblib.load to return a dummy model with a predict method, and create a temporary FASTA file. 2. Act: Call crab_standalone.main(). 3. Assert: Verify predictions.csv is created in the temp output directory and contains expected columns (id,sequence,prediction,classification,probability)]. Type: Task.
   - [ID-11.3.3] [PLANNING/SYNC]: [1. Open leai_docs/planning/roadmap_11_standalone_cli.md and check - [x] for Story 11.3. 2. Append > Files touched: crab_standalone.py, backend/tests/test_standalone.py under the story]. Type: Task.
 
-- [ ] Story 11.4: Researcher Documentation | [MoSCoW: MUST] | [Complexity: TRIVIAL]
-  Business Requirement: Provide clear instructions on how a researcher can use crab_standalone.py without the web platform.
+- [x] Story 11.4: Researcher Documentation | [MoSCoW: MUST] | [Complexity: TRIVIAL]
+
+Files touched: README_STANDALONE.md
+Business Requirement: Provide clear instructions on how a researcher can use crab_standalone.py without the web platform.
   Story Context Radius: {"README_STANDALONE.md": ["*"], "leai_docs/planning/roadmap_11_standalone_cli.md": ["*"], "leai_docs/planning/global_backlog.md": ["*"]}
   Layered Technical Breakdown:
   - [ID-11.4.1] [DOCUMENTATION/SYNC]: [1. Create README_STANDALONE.md at project root. 2. Document python package requirements (pip install pandas xgboost joblib). 3. Document command usage explicitly: python crab_standalone.py -p input.fasta -o ./output/ -m Bacteria.pkl]. Type: Task.
