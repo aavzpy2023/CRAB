@@ -13,7 +13,7 @@ EPIC 10: RNA Biological Accuracy & Legacy Bias Correction | BACKEND CORE
   Layered Technical Breakdown:
   [ID-10.0.1] [PLANNING/INIT]: [1. Create leai_docs/planning/ directory if missing. 2. Append the new EPIC 10, its [REQ-030] list, and the Roadmap link to leai_docs/planning/global_backlog.md. 3. Write THIS ENTIRE raw markdown response (INCLUDING the YAML Frontmatter block above) into leai_docs/planning/roadmap_10_rna_biological_accuracy.md]. Type: Task.
 
-- [ ] Story 10.1: Feature Extraction Biological Normalization | [MoSCoW: MUST] | [Complexity: EASY]
+- [x] Story 10.1: Feature Extraction Biological Normalization | [MoSCoW: MUST] | [Complexity: EASY]
   Business Requirement: Normalize RNA sequences to DNA (U -> T) to prevent zero-vectors and ensure accurate XGBoost predictions. (<-- REQ-030)
   Story Context Radius: {"context.md": [""], "backend/app/utils/feature_extraction.py": [""], "backend/tests/test_inference.py": [""], "leai_docs/planning/roadmap_10_rna_biological_accuracy.md": [""], "leai_docs/planning/global_backlog.md": ["*"]}
   Layered Technical Breakdown (FLASH-COMPATIBLE ALGORITHMS):

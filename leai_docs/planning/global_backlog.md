@@ -59,4 +59,4 @@
 
 ## RNA Biological Accuracy & Legacy Bias Correction (EPIC 10)
 
-- [ ] [REQ-030] Normalize RNA sequences to DNA (U -> T) to prevent zero-vectors and correct legacy XGBoost nucleotide blindness.
+- [x] [REQ-030] Normalize RNA sequences to DNA (U -> T) to prevent zero-vectors and correct legacy XGBoost nucleotide blindness.

@@ -2,6 +2,7 @@
 
 ## Architecture Overview
 - Orchestration: Docker Compose (Nginx + Frontend + Backend).
+- Biological Rule: Legacy "bug-for-bug" compatibility explicitly dropped. RNA (U) MUST be converted to DNA (T) before feature extraction to prevent XGBoost zero-vectors.
 - Proxy: Nginx Reverse Proxy as Global Entrypoint (Port 80).
 - Backend: FastAPI (Hexagonal/Vertical Slice).
 - ML Pipeline: Scikit-learn + Joblib for model persistence.

@@ -4,15 +4,14 @@ BASES = ['A', 'C', 'G', 'T']
 KMER_KEYS = [''.join(p) for p in itertools.product(BASES, repeat=3)]
 
 def extract_3mers(
-    sequence: str, 
-    kmer_keys: Optional[List[str]] = None
-) -> List[float]:
+def extract_3mers(sequence: str, kmer_keys: Optional[List[str]]=None) -> List[float]:
     """
     Extracts and normalizes trinucleotide frequencies into a 64-element list.
-    Bug-for-bug legacy compatibility: does NOT convert U to T.
+    BIOLOGICAL ACCURACY OVERRIDE: Converts RNA (U) to DNA (T) to prevent 
+    nucleotide blindness and zero-vectors in the legacy ML pipeline.
     """
     keys = kmer_keys or KMER_KEYS
-    seq = sequence.upper()
+    seq = sequence.upper().replace("U", "T")
     counts = {k: 0.0 for k in keys}
     trinucs = [seq[i:i + 3] for i in range(0, len(seq) - 2, 3)]
     total = len(trinucs)

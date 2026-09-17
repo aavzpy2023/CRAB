@@ -2,8 +2,20 @@ import pytest
 from fastapi.testclient import TestClient
 from unittest.mock import MagicMock, patch, ANY
 from main import app
-
 client = TestClient(app)
+
+def test_extract_3mers_rna_biological_normalization():
+    from app.utils.feature_extraction import extract_3mers, KMER_KEYS
+    # Arrange: RNA sequence with Uracil
+    sequence = "GUGAUU"
+    # Act
+    features = extract_3mers(sequence)
+    # Assert: Should dynamically normalize and match DNA keys 'GTG' and 'ATT'
+    idx_gtg = KMER_KEYS.index("GTG")
+    idx_att = KMER_KEYS.index("ATT")
+    assert features[idx_gtg] == 0.5
+    assert features[idx_att] == 0.5
+    assert sum(features) == 1.0
 
 @pytest.fixture
 def mock_model():
