@@ -42,19 +42,16 @@ def test_standalone_main(mock_joblib_load, tmp_path):
 
     df = pd.read_csv(csv_file)
     expected_columns = [
-        "id",
-        "sequence",
-        "prediction",
-        "classification",
-        "probability",
+        "seq_id",
+        "probabilidad_coding",
+        "prediccion_label",
     ]
     assert list(df.columns) == expected_columns
     assert len(df) == 2
 
-    # Verify U -> T replacement logic was executed successfully via CLI
-    assert df.iloc[0]["sequence"] == "ACGT"
-    assert df.iloc[1]["sequence"] == "GCTA"
+    # Verify inference mapping rules and ID extraction
+    assert df.iloc[0]["seq_id"] == "seq1"
+    assert df.iloc[1]["seq_id"] == "seq2"
     
-    # Verify inference mapping rules
-    assert df.iloc[0]["classification"] == "coding_protein"
-    assert df.iloc[1]["classification"] == "ncRNA"
+    assert df.iloc[0]["prediccion_label"] == "coding_protein"
+    assert df.iloc[1]["prediccion_label"] == "ncRNA"

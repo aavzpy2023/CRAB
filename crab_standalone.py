@@ -53,13 +53,12 @@ def run_inference(records: list[tuple[str, str]], model_path: str) -> list[dict]
     for (header, seq), prob in zip(records, probs):
         float_prob = float(prob)
         classification = "coding_protein" if float_prob > 0.4629 else "ncRNA"
+        seq_id = header.split()[0] if header else "unknown"
         results.append(
             {
-                "id": header,
-                "sequence": seq,
-                "prediction": float_prob,
-                "classification": classification,
-                "probability": float_prob,
+                "seq_id": seq_id,
+                "probabilidad_coding": round(float_prob, 4),
+                "prediccion_label": classification,
             }
         )
     return results

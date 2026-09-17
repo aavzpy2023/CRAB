@@ -32,4 +32,4 @@ Auto-Normalization: Automatically converts RNA sequences (U) to DNA (T) to ensur
 
 Multi-line Sequence Handling: Automatically parses and merges multi-line sequences found in standard biological FASTA formats.
 
-CSV Export: Deterministically exports an easy-to-read CSV with headers id, sequence, prediction, classification, and probability.
+* **CSV Export**: Deterministically exports an easy-to-read CSV with headers `seq_id`, `probabilidad_coding`, and `prediccion_label`.
