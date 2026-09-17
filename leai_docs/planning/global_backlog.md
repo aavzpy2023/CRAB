@@ -56,3 +56,7 @@
 - [x] [REQ-027] Asset Injection & Dumb View Branding (CRAB).
 - [x] [REQ-028] UI Cleanup (Remove examples link).
 - [x] [REQ-029] Results Navigation (State Fractality, Return to Home).
+
+## RNA Biological Accuracy & Legacy Bias Correction (EPIC 10)
+
+- [ ] [REQ-030] Normalize RNA sequences to DNA (U -> T) to prevent zero-vectors and correct legacy XGBoost nucleotide blindness.
