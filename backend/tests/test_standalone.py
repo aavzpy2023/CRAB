@@ -25,11 +25,14 @@ def test_standalone_main(mock_joblib_load, tmp_path):
 
     out_dir = tmp_path / "output"
 
+    dummy_model = tmp_path / "dummy_model.pkl"
+    dummy_model.touch()
+
     test_args = [
         "crab_standalone.py",
         "-p", str(fasta_file),
         "-o", str(out_dir),
-        "-m", "dummy_model.pkl"
+        "-m", str(dummy_model)
     ]
 
     # Act
