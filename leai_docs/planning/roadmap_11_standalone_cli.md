@@ -13,7 +13,8 @@ complexity_aggregate: "MEDIUM"
   Layered Technical Breakdown:
   - [ID-11.0.1] [PLANNING/INIT]: [1. Create leai_docs/planning/ directory if missing. 2. Append EPIC 11, REQ-031, REQ-032, and the Roadmap link to leai_docs/planning/global_backlog.md. 3. Write THIS ENTIRE raw markdown response (INCLUDING the YAML Frontmatter block above) into leai_docs/planning/roadmap_11_standalone_cli.md]. Type: Task.
 
-- [ ] Story 11.1: Standalone Script Scaffolding & Parsing Logic | [MoSCoW: MUST] | [Complexity: MEDIUM]
+- [x] Story 11.1: Standalone Script Scaffolding & Parsing Logic | [MoSCoW: MUST] | [Complexity: MEDIUM]
+  > Files touched: crab_standalone.py
   Business Requirement: Create the self-contained script with argparse and embedded sequence parsing (including U->T normalization).
   Story Context Radius: {"crab_standalone.py": ["*"], "leai_docs/planning/roadmap_11_standalone_cli.md": ["*"]}
   Layered Technical Breakdown:
