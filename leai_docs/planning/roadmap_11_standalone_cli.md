@@ -22,7 +22,8 @@ complexity_aggregate: "MEDIUM"
   - [ID-11.1.2] [CORE/LOGIC]: [1. In crab_standalone.py, implement parse_fasta_file(filepath) that yields (header, seq). 2. Implement U->T substitution within the parser (replace 'U' with 'T'). 3. Filter out invalid lines and ensure multi-line sequences are concatenated]. Type: Task.
   - [ID-11.1.3] [PLANNING/SYNC]: [1. Open leai_docs/planning/roadmap_11_standalone_cli.md and check - [x] for Story 11.1. 2. Append > Files touched: crab_standalone.py under the story]. Type: Task.
 
-- [ ] Story 11.2: Embedded Feature Extraction & XGBoost Inference | [MoSCoW: MUST] | [Complexity: HARD]
+- [x] Story 11.2: Embedded Feature Extraction & XGBoost Inference | [MoSCoW: MUST] | [Complexity: HARD]
+  > Files touched: crab_standalone.py
   Business Requirement: Embed the 3-mer extraction algorithm and XGBoost loading/prediction logic locally inside the script.
   Story Context Radius: {"crab_standalone.py": ["*"], "leai_docs/planning/roadmap_11_standalone_cli.md": ["*"]}
   Layered Technical Breakdown:
