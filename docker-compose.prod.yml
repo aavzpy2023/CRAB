@@ -1,0 +1,34 @@
+services:
+
+  backend:
+    container_name: rna_mining-backend-prod
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.prod
+    expose:
+      - "8000"
+    environment:
+      - PYTHONDONTWRITEBYTECODE=1
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped
+
+  frontend:
+    container_name: rna_mining-frontend-prod
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.prod
+    expose:
+      - "80"
+    restart: unless-stopped
+
+  nginx:
+    container_name: rna_mining-nginx-prod
+    build: ./nginx
+    volumes:
+      - ./nginx/nginx.prod.conf:/etc/nginx/conf.d/default.conf:ro
+    ports:
+      - "80:80"
+    depends_on:
+      - frontend
+      - backend
+    restart: unless-stopped

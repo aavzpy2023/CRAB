@@ -47,11 +47,23 @@
 
 ## 🚀 Quick Start
 
-### Docker Compose (Recommended Production Run)
+### Docker Compose (Production)
 
 ```bash
-docker-compose up --build -d
+make up-prod
 ```
+
+Builds static assets (`npm ci && npm run build`) and serves them via Nginx,
+with the backend running without `--reload`. No source bind-mounts.
+
+### Docker Compose (Local Development)
+
+```bash
+make up
+```
+
+Runs the Vite dev server and Uvicorn with `--reload`, with source mounted
+as volumes for hot-reload.
 
 ### Local Development Setup
 
