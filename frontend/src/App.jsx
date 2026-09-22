@@ -13,6 +13,8 @@ import Tutorial from './pages/Tutorial';
 import Download from './pages/Download';
 import Results from './pages/Results';
 import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
+import logoIcon from './assets/logo.ico';
+import logoImg from './assets/logo.png';
 
 
 
@@ -58,7 +60,7 @@ const Navbar = ({ currentView, setView }) => {
               }}
             >
               <img 
-                src="/src/assets/logo.ico" 
+                src={logoIcon}
                 alt="CRAB Icon" 
                 style={{
                   height: '32px',
@@ -180,7 +182,7 @@ function App() {
           {currentView === 'run' && (
             <div style={{ width: '100%' }}>
             <section style={styles.hero}>
-        <img src="/src/assets/logo.png" alt="CRAB Logo" style={{ maxWidth: '200px', margin: '0 auto 16px auto', display: 'block', borderRadius: '12px' }} />
+        <img src={logoImg} alt="CRAB Logo" style={{ maxWidth: '200px', margin: '0 auto 16px auto', display: 'block', borderRadius: '12px' }} />
         </section>
 
         <FastaUploadCard

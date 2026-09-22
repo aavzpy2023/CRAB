@@ -1,4 +1,5 @@
 import React from 'react';
+import logoIcon from '../assets/logo.ico';
 
 export function Navbar() {
   const styles = {
@@ -29,7 +30,7 @@ export function Navbar() {
   return (
     <header style={styles.header} data-testid="navbar">
       <div style={{ display: 'flex', alignItems: 'center' }}>
-        <img src="/src/assets/logo.ico" alt="CRAB Icon" style={{ height: '24px', marginRight: '8px' }} />
+        <img src={logoIcon} alt="CRAB Icon" style={{ height: '24px', marginRight: '8px' }} />
         <h2 style={styles.title}>CRAB</h2>
       </div>
       <span style={styles.badge}>v1.0.0</span>
