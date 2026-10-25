@@ -9,7 +9,8 @@ import pytest
 project_root = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(project_root))
 
-import crab_standalone
+# Gracefully skip test collection if crab_standalone is not present/generated
+crab_standalone = pytest.importorskip("crab_standalone")
 
 
 @patch("crab_standalone.joblib.load")

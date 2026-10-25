@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field, AfterValidator
+from pydantic import BaseModel, Field, AfterValidator, field_validator
 from typing import List, Annotated
 from app.utils.validators import clean_sequence
 
@@ -12,6 +12,14 @@ class FastaRecordDTO(BaseModel):
         ..., description="The raw RNA/DNA sequence string"
     )
     length: int = Field(..., description="Length of the sequence")
+
+    @field_validator("sequence", mode="before")
+    @classmethod
+    def pre_sanitize_sequence(cls, v: str) -> str:
+        """Explicitly strip multiline FASTA formatting characters."""
+        if isinstance(v, str):
+            return v.replace("\n", "").replace("\r", "").replace(" ", "")
+        return v
 
 class SampleFastaResponse(BaseModel):
     """

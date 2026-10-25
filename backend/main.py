@@ -1,4 +1,5 @@
 from fastapi import FastAPI, UploadFile, File, Form, HTTPException
+from pydantic import ValidationError
 import sys
 from typing import List
 from pathlib import Path
@@ -73,7 +74,10 @@ async def upload_fasta(file: UploadFile = File(...)):
         raise HTTPException(status_code=400, detail="Invalid file extension")
     
     content = await file.read()
-    return parse_fasta_bytes(content)
+    try:
+        return parse_fasta_bytes(content)
+    except ValidationError as e:
+        raise HTTPException(status_code=400, detail=str(e))
 
 @app.post("/api/v1/fasta/predict", response_model=PredictionResponseDTO)
 async def predict_fasta(request: PredictionRequestDTO):
@@ -133,7 +137,10 @@ async def run_inference(
         raise HTTPException(status_code=503, detail="XGBoost not installed")
 
     content = await file.read()
-    records = parse_fasta_bytes(content)
+    try:
+        records = parse_fasta_bytes(content)
+    except ValidationError as e:
+        raise HTTPException(status_code=400, detail=str(e))
     predictions = []
     if records:
         raw_cols = getattr(app.state.model, "feature_names", None)

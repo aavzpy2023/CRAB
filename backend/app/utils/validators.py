@@ -1,6 +1,7 @@
 import re
 
-RNA_DNA_REGEX = r"^[ACGTUacgtu\s]+$"
+# Includes standard ACGTU and IUPAC 'N' for ambiguity
+RNA_DNA_REGEX = r"^[ACGTUNacgtun\s]+$"
 
 
 def strict_fasta_check(content: str) -> None:
