@@ -3,6 +3,7 @@
 ## Static Assets & UI Downloads
 - **Isolation Rule**: UI download components (e.g., `Download.jsx`) MUST remain "Dumb Views".
 - **Zero-State**: They are isolated pure links pointing strictly to static assets in `frontend/public/` (like `/standalone.zip` and `/samples.zip`). 
+- **Probability Ordering Contract**: All inference predictions displayed in the results table and generated in export files (FASTA/CSV for Full, Coding, and Non-Coding) MUST be strictly sorted descending by probability.
 - **Generation Constraint**: These zip bundles are generated offline by Python dev scripts (e.g., `_scripts/dev/build_samples_zip.py`), ensuring no backend state or dynamic DTO processing is involved when users request files.
 
 ## Deployment

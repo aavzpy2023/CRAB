@@ -9,7 +9,7 @@ import { useState, useMemo } from 'react';
  */
 export const useTableLogic = (initialData = []) => {
     const [search, setSearch] = useState('');
-    const [sort, setSort] = useState({ key: null, direction: 'asc' });
+    const [sort, setSort] = useState({ key: 'probability', direction: 'desc' });
     const [currentPage, setPage] = useState(1);
     
     const ITEMS_PER_PAGE = 13;
@@ -30,13 +30,22 @@ export const useTableLogic = (initialData = []) => {
         // 2. Sequential Sorting
         if (sort.key) {
             data.sort((a, b) => {
-                const valA = a[sort.key];
-                const valB = b[sort.key];
+                let valA = a[sort.key];
+                let valB = b[sort.key];
+
+                if (sort.key === 'probability') {
+                    valA = Number(valA || 0);
+                    valB = Number(valB || 0);
+                }
                 
                 if (valA < valB) return sort.direction === 'asc' ? -1 : 1;
                 if (valA > valB) return sort.direction === 'asc' ? 1 : -1;
                 return 0;
             });
+        } else {
+            data.sort((a, b) => (
+                Number(b.probability || 0) - Number(a.probability || 0)
+            ));
         }
 
         return data;

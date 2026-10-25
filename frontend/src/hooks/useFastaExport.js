@@ -32,8 +32,12 @@ export const useFastaExport = () => {
         return chunks ? chunks.join('\n') : cleanSeq;
     };
 
+    const sortByProbDesc = (items) => [...items].sort(
+        (a, b) => Number(b.probability || 0) - Number(a.probability || 0)
+    );
+
     const generateFastaText = (data) => {
-        return data.map(d => {
+        return sortByProbDesc(data).map(d => {
             const cleanId = (d.id || '').trim().replace(/^>/, '').split(/\s+/)[0];
             const label = isCoding(d) ? 'coding_protein' : 'ncRNA';
             const prob = Number(d.probability || 0).toFixed(4);
@@ -43,7 +47,7 @@ export const useFastaExport = () => {
 
     const generateCsvText = (data) => {
         const header = 'seq_id,probabilidad_coding,prediccion_label\n';
-        const rows = data.map((d) => {
+        const rows = sortByProbDesc(data).map((d) => {
             const cleanId = (d.id || '')
             .trim()
             .replace(/^>/, '')
