@@ -96,6 +96,10 @@ export default function Results({ onReset }) {
             search: tableHandlers.search, 
             setSearch: tableHandlers.setSearch 
         }}
+        sortHandlers={{
+            sort: tableHandlers.sort,
+            toggleSortDirection: tableHandlers.toggleSortDirection
+        }}
         paginationHandlers={{ 
             currentPage: tableHandlers.currentPage, 
             totalPages: tableHandlers.totalPages, 

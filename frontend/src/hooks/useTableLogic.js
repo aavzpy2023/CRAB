@@ -68,6 +68,13 @@ export const useTableLogic = (initialData = []) => {
         setPage(Math.max(1, Math.min(pageNumber, totalPages)));
     };
 
+    const toggleSortDirection = () => {
+        setSort(prev => ({
+            key: prev.key || 'probability',
+            direction: prev.direction === 'asc' ? 'desc' : 'asc'
+        }));
+    };
+
     return {
         paginatedData,
         totalPages,
@@ -76,6 +83,7 @@ export const useTableLogic = (initialData = []) => {
         search,
         setSearch,
         sort,
-        setSort
+        setSort,
+        toggleSortDirection
     };
 };

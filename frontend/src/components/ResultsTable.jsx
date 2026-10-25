@@ -43,17 +43,27 @@ const getClassification = (id, fallback) => {
  * Pure presentational table for sequence predictions.
  * Strictly consumes state via passed handlers. No internal logic.
  */
-export const ResultsTable = ({ data, searchHandlers, paginationHandlers }) => {
+export const ResultsTable = ({ 
+    data, 
+    searchHandlers, 
+    paginationHandlers, 
+    sortHandlers = {} 
+}) => {
     const [selectedRow, setSelectedRow] = useState(null);
     const { search, setSearch } = searchHandlers;
     const { currentPage, totalPages, setPage } = paginationHandlers;
+    const { 
+        sort = { key: 'probability', direction: 'desc' }, 
+        toggleSortDirection 
+    } = sortHandlers;
 
     return (
         <div style={{ width: '100%' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '16px', alignItems: 'center' }}>
-                <input
-                    type="text"
-                    placeholder="Search sequences..."
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <input
+                        type="text"
+                        placeholder="Search sequences..."
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                     style={{
@@ -65,6 +75,29 @@ export const ResultsTable = ({ data, searchHandlers, paginationHandlers }) => {
                         width: '250px'
                     }}
                 />
+                {toggleSortDirection && (
+                    <button
+                        type="button"
+                        onClick={toggleSortDirection}
+                        style={{
+                            ...btnStyle,
+                            backgroundColor: '#1e293b',
+                            border: '1px solid #334155',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '6px'
+                        }}
+                        title="Toggle sort direction"
+                    >
+                        <span>Sort:</span>
+                        <strong>
+                            {sort.direction === 'asc' 
+                                ? 'Ascending ▲' 
+                                : 'Descending ▼'}
+                        </strong>
+                    </button>
+                )}
+                </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                     <button 
                         style={{ ...btnStyle, opacity: currentPage === 1 ? 0.5 : 1 }}
@@ -91,7 +124,18 @@ export const ResultsTable = ({ data, searchHandlers, paginationHandlers }) => {
                     <tr>
                         <th style={{ ...thStyle, width: '50%' }}>Sequence ID</th>
                         <th style={{ ...thStyle, width: '25%' }}>Coding Potential</th>
-                        <th style={{ ...thStyle, width: '25%' }}>Probability</th>
+                        <th 
+                            style={{ 
+                                ...thStyle, 
+                                width: '25%',
+                                cursor: toggleSortDirection ? 'pointer' : 'default',
+                                userSelect: 'none'
+                            }}
+                            onClick={toggleSortDirection}
+                            title="Click to toggle sort direction"
+                        >
+                            Probability {sort.direction === 'asc' ? '▲' : '▼'}
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
