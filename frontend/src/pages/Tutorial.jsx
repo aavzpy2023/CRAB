@@ -272,7 +272,7 @@ const TUTORIAL_DATA = {
             <p>Once the file is loaded and the organism is selected, the execution button will be enabled.</p>
             <ul style={styles.modalList}>
             <li style={styles.modalListItem}>
-            <strong>Start Inference:</strong> Click the <strong>"Run RNAmining"</strong> button.
+            <strong>Start Inference:</strong> Click the <strong>"Run evaluation"</strong> button.
             </li>
             <li style={styles.modalListItem}>
             <strong>Processing:</strong> The frontend securely transmits the data to the FastAPI backend, where the XGBoost engine (via Scikit-Learn) rapidly processes the sequences.
@@ -350,7 +350,7 @@ export default function Tutorial() {
         User Guide
         </h2>
         <p style={styles.mainCardDesc}>
-        This tutorial will guide you through the RNA Mining platform, a high-performance system designed to predict whether a nucleotide sequence is coding or non-coding using optimized Machine Learning models.
+        This tutorial will guide you through the CRAB platform, a high-performance system designed to predict whether a nucleotide sequence is coding or non-coding using optimized Machine Learning models.
         </p>
 
         {/* Grid of Steps */}

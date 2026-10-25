@@ -191,11 +191,11 @@ const BLOCKS_DATA = {
     id: 'overview',
     icon: 'info',
     title: 'Overview & Mission',
-    snippet: 'RNA Mining is a high-performance bioinformatics pipeline for nucleotide coding potential prediction using Machine Learning.',
+    snippet: 'CRAB is a high-performance bioinformatics pipeline for nucleotide coding potential prediction using Machine Learning.',
     fullContent: (
       <>
       <p>
-      <strong>RNA Mining</strong> is a high-performance bioinformatics pipeline
+      <strong>CRAB</strong> is a high-performance bioinformatics pipeline
       designed for <strong>nucleotide coding potential prediction</strong> using
       advanced Machine Learning architectures. It enables researchers
       to process FASTA sequences to determine coding or non-coding

@@ -174,7 +174,7 @@ export default function Download() {
         Repository & Local Deployment
         </h2>
         <p style={styles.mainCardDesc}>
-        RNAmining is fully open-source. For massive dataset processing or integration into your own HPC pipelines, we recommend downloading and running the platform locally.
+        CRAB is fully open-source. For massive dataset processing or integration into your own HPC pipelines, we recommend downloading and running the platform locally.
         </p>
 
         <div style={styles.grid}>

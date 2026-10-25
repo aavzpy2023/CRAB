@@ -225,7 +225,7 @@ const CONTACT_DATA = {
         icon: 'biotech',
         name: 'Nathaly Elizalde Araya',
         role: 'Original Research',
-        snippet: 'PhD Student & Paper Author. Developed the foundational research and biological algorithms powering RNA Mining.',
+        snippet: 'PhD Student & Paper Author. Developed the foundational research and biological algorithms powering coding RNA assesment.',
         email: 'nathaly.elizaldea@utem.cl',
         fullContent: (
             <>
@@ -281,7 +281,7 @@ const CONTACT_DATA = {
         fullContent: (
             <>
             <p>
-            <strong>Dr. Raul Arias-Carrasco</strong> serves as Project Supervisor and Academic Advisor for the RNA Mining platform.
+            <strong>Dr. Raul Arias-Carrasco</strong> serves as Project Supervisor and Academic Advisor for the CRAB platform.
             </p>
             <h4 style={styles.sectionHeading}>Current Appointments</h4>
             <p>

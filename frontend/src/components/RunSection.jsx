@@ -86,7 +86,7 @@ export const RunSection = ({ isRunning, disabled, onClick, result, file }) => {
     ) : (
         <>
         <span className="material-symbols-outlined">play_circle</span>
-        Run RNAmining
+        Evaluate
         </>
     )}
     </button>

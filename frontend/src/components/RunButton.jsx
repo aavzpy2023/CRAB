@@ -24,7 +24,7 @@ export function RunButton({ isRunning, disabled, onClick }) {
       disabled={disabled || isRunning}
       data-testid="run-button"
     >
-      {isRunning ? '⏳ Ejecutando Inferencia...' : '🚀 Ejecutar Análisis ML'}
+      {isRunning ? '⏳ Running inference...' : '🚀 Run ML analysis'}
     </button>
   );
 }
