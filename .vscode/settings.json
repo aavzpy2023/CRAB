@@ -1,0 +1,16 @@
+{
+  "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
+  "python.analysis.exclude": ["**/.venv", "**/node_modules", "**/build", "**/dist"],
+  "python.analysis.indexing": false,
+  "python.analysis.diagnosticMode": "openFilesOnly",
+  "python.analysis.typeCheckingMode": "off",
+  "python.analysis.autoImportCompletions": false,
+  "files.exclude": { "**/__pycache__": true },
+  "files.watcherExclude": {
+    "**/.venv/**": true, "**/node_modules/**": true, "**/.git/objects/**": true,
+    "**/dist/**": true, "**/build/**": true
+  },
+  "search.exclude": {
+    "**/.venv": true, "**/node_modules": true, "**/dist": true, "**/build": true
+  }
+}
