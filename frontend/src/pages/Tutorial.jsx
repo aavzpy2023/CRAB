@@ -300,7 +300,7 @@ const TUTORIAL_DATA = {
             <code>0</code>: Identified as a non-coding sequence.
             </li>
             <li style={styles.modalListItem}>
-            <strong>Probability:</strong> A value between 0 and 1 indicating the model's confidence level (e.g., <code>0.9850</code> represents a 98.5% probability).
+            <strong>Probability:</strong> The model's probability that the sequence is ncRNA, between 0 and 1. Values above the cutoff (<code>0.5466</code>) are classified as ncRNA (e.g., <code>0.9850</code> is a 98.5% probability of ncRNA).
             </li>
             </ul>
             </>

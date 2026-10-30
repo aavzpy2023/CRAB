@@ -21,7 +21,7 @@ def test_extract_3mers_rna_biological_normalization():
 def mock_model():
     """Creates a mock model mimicking xgboost interface."""
     model = MagicMock()
-    model.predict.return_value = [0.53]  # P(ncRNA) -> P(coding)=0.47
+    model.predict.return_value = [0.53]  # P(ncRNA) below the 0.546569 cutoff -> coding
     return model
 
 def test_predict_endpoint_no_model():
@@ -49,7 +49,7 @@ def test_predict_endpoint_success(mock_model):
         data = response.json()
         assert data["model_version"] == "v1.0.0"
         assert data["results"][0]["prediction"] == 1
-        assert data["results"][0]["probability"] == 0.47
+        assert data["results"][0]["probability"] == 0.53
         assert data["results"][0]["sequence"] == "ACGU"
         assert data["results"][0]["classification"] == "coding"
         mock_extract.assert_called_once_with("ACGU", ANY)

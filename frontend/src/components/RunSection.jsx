@@ -154,7 +154,7 @@ export const RunSection = ({ isRunning, disabled, onClick, result, file }) => {
               📊 Example Prediction Results (.fasta)
             </h3>
             <span style={{ fontSize: '12px', color: '#94a3b8' }}>
-              Cutoff Threshold: 0.4534
+              ncRNA if P(ncRNA) &gt; 0.5466
             </span>
           </div>
 
@@ -195,7 +195,7 @@ export const RunSection = ({ isRunning, disabled, onClick, result, file }) => {
                 margin: 0
               }}
             >
-{`>NGAF01000006.1/2237-1938 prediction=ncRNA prob=0.0658
+{`>NGAF01000006.1/2237-1938 prediction=ncRNA prob=0.9342
 ACGGAGGGGCGGAAGGCCAAGATCGAAACGGAAGAGAAGGTTCGATCTCCCATCCGCACT
 TCCCAGCACGGACGCCAGGCACCCACGCGGAGCGCGCCGCGACAAGGGCAGAAGCGTTGT
 GGGCCTGCGAAATTCGAATTCACGTCGGCAATGGCCTCGCACAGGTTGCGGGGATGAACC
@@ -242,7 +242,7 @@ CGGGTAGTCCGTGCTAGCGGGCGGTGAGGCCGACGACGGCTACGCCGCCCGCTTCGATGT
                 margin: 0
               }}
             >
-{`>SMKY01000176.1/1024-430 prediction=coding_protein prob=0.9194
+{`>SMKY01000176.1/1024-430 prediction=coding_protein prob=0.0806
 ATGAGGGTGGTGCTGGTGCGGTGCAGAAAGTCGGTGCGGGCGTTTCGGACCTTGCGGCAG
 GTGCGGGCGACCTTGTTCTTGGCCTTGCGGCAGTTGGCCGAACCGCGCTGCTTGCGGGCC
 ATCCGCCGCTGGTGCCGGGCCAGATTCGTCGCCCTGCGCTCCAGATGGCGGGGGTTGGCA

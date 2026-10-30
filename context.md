@@ -15,6 +15,6 @@
 - **API Boundary Marshalling**: All validation failures occurring at the Core Pydantic DTO layer (`ValidationError`) MUST be trapped by the API boundary endpoints (e.g., `upload`, `inference`) and returned as `400 Bad Request` to prevent bubbling up as `500 Internal Server Error`.
 
 ## ML Model Contract
-- **Inverted Classes**: The XGBoost model (`Bacteria.pkl`) outputs **P(ncRNA)** (0 = coding_protein, 1 = ncRNA). The API/CSV/UI expose `probabilidad_coding = 1 - P(ncRNA)`. A sequence is `ncRNA` when P(ncRNA) > `NCRNA_THRESHOLD` (0.546569037437439, from the model author's `predictor_CRAB2_2.py`). The backend and `standalone.zip` MUST apply the same rule.
+- **Inverted Classes**: The XGBoost model (`Bacteria.pkl`) outputs **P(ncRNA)** (0 = coding_protein, 1 = ncRNA). The API/CSV/UI expose the raw value as `probabilidad_ncRNA` (no `1 - P` conversion). A sequence is `ncRNA` when P(ncRNA) > `NCRNA_THRESHOLD` (0.546569037437439, from the model author's `predictor_CRAB2_2.py`). The backend and `standalone.zip` MUST apply the same rule.
 - **Reference**: `_model_update261030/` holds the author's reference script, model and sample predictions used to validate parity.
 - Files: `backend/main.py` (`NCRNA_THRESHOLD`), `backend/app/models/Bacteria.pkl`, `frontend/public/standalone.zip`, `_model_update261030/predictor_CRAB2_2.py`, `backend/tests/test_inference.py`, `backend/tests/test_standalone.py`

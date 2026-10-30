@@ -47,7 +47,7 @@ def test_standalone_main(mock_joblib_load, tmp_path):
     df = pd.read_csv(csv_file)
     expected_columns = [
         "seq_id",
-        "probabilidad_coding",
+        "probabilidad_ncRNA",
         "prediccion_label",
     ]
     assert list(df.columns) == expected_columns

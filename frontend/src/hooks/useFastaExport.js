@@ -46,7 +46,7 @@ export const useFastaExport = () => {
     };
 
     const generateCsvText = (data) => {
-        const header = 'seq_id,probabilidad_coding,prediccion_label\n';
+        const header = 'seq_id,probabilidad_ncRNA,prediccion_label\n';
         const rows = sortByProbDesc(data).map((d) => {
             const cleanId = (d.id || '')
             .trim()

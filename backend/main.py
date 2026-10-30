@@ -100,10 +100,9 @@ async def predict_fasta(request: PredictionRequestDTO):
         cols = raw_cols if has_cols else DNA_KMERS
         features = extract_3mers(record.sequence, cols)
         dmatrix = xgb.DMatrix(pd.DataFrame([features], columns=cols))
-        # The API contract is P(coding) = 1 - P(ncRNA).
-        p_ncrna = float(app.state.model.predict(dmatrix)[0])
-        prob = 1.0 - p_ncrna
-        pred = 0 if p_ncrna > NCRNA_THRESHOLD else 1
+        # The API exposes the raw model output, P(ncRNA).
+        prob = float(app.state.model.predict(dmatrix)[0])
+        pred = 0 if prob > NCRNA_THRESHOLD else 1
         classification = "coding" if pred == 1 else "non-coding"
         
         results.append(PredictionResultDTO(
@@ -156,10 +155,9 @@ async def run_inference(
         dmatrix = xgb.DMatrix(df)
         probs = app.state.model.predict(dmatrix)
         for r, prob in zip(records, probs):
-            # The API contract is P(coding) = 1 - P(ncRNA).
-            p_ncrna = float(prob)
-            p_val = 1.0 - p_ncrna
-            label = "ncRNA" if p_ncrna > NCRNA_THRESHOLD else "coding_protein"
+            # The API exposes the raw model output, P(ncRNA).
+            p_val = float(prob)
+            label = "ncRNA" if p_val > NCRNA_THRESHOLD else "coding_protein"
             predictions.append({
                 "id": r.header,
                 "sequence": r.sequence,
