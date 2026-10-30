@@ -227,3 +227,6 @@ SKDEV_tree.txt
 
 node_modules/
 
+
+# Editor swap files
+*.kate-swp
