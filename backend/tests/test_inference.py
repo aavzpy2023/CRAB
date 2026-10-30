@@ -21,7 +21,7 @@ def test_extract_3mers_rna_biological_normalization():
 def mock_model():
     """Creates a mock model mimicking xgboost interface."""
     model = MagicMock()
-    model.predict.return_value = [0.47]
+    model.predict.return_value = [0.53]  # P(ncRNA) -> P(coding)=0.47
     return model
 
 def test_predict_endpoint_no_model():

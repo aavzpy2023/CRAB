@@ -33,14 +33,14 @@ EPIC 1: ML LOGIC SYNCHRONIZATION (BACKEND) | [ISOLATED VERTICAL]
   [ID-1.0.4] [PLANNING/SYNC]: [1. Open roadmap_9_crab_ml_sync.md and check - [x] for Story 1.0. 2. Append > Files touched: [files] under the story]. Type: Task.
 
 - [x] Story 1.1: XGBoost DMatrix & Threshold Inference | [MoSCoW: MUST] | [Complexity: HARD] (<-- REQ-026) 
-  Business Requirement: Ensure the backend constructs the correct matrix and applies the 0.4629 threshold. 
+  Business Requirement: Ensure the backend constructs the correct matrix and applies the ncRNA threshold (0.546569 on P(ncRNA)). 
   > Files touched: backend/main.py, backend/tests/test_inference.py
   Story Context Radius: {"backend/main.py": [""], "backend/tests/test_inference.py": [""], "backend/app/utils/feature_extraction.py": ["READ-ONLY"], "leai_docs/planning/roadmap_9_crab_ml_sync.md": [""], "leai_docs/planning/global_backlog.md": [""]} 
   Layered Technical Breakdown (FLASH-COMPATIBLE ALGORITHMS): 
-  [ID-1.1.1] [TESTING/TDE]: [1. Open test_inference.py. 2. Mock the model prediction to return a probability of 0.47. 3. Assert the classification returned is coding (since 0.47 > 0.4629)]. Type: Task. 
+  [ID-1.1.1] [TESTING/TDE]: [1. Open test_inference.py. 2. Mock the model prediction to return P(ncRNA)=0.53. 3. Assert the classification returned is coding and probability is 0.47 (P(coding)=1-0.53; 0.53 <= 0.546569)]. Type: Task. 
   [ID-1.1.2] [LOGIC/IMPORTS]: [1. Open main.py. 2. Import xgboost as xgb and pandas as pd at the top of the file]. Type: Task. 
   [ID-1.1.3] [LOGIC/MATRIX]: [1. In predict_fasta, convert the extracted features into a DataFrame with the 64 combinations as columns (matching KMER_KEYS). 2. Create an xgb.DMatrix from the DataFrame]. Type: Task. 
-  [ID-1.1.4] [LOGIC/THRESHOLD]: [1. Call app.state.model.predict(dmatrix). 2. Apply logic: if prob > 0.4629, classification is 'coding', else 'non-coding'. 3. Map to PredictionResultDTO]. Type: Task. 
+  [ID-1.1.4] [LOGIC/THRESHOLD]: [1. Call app.state.model.predict(dmatrix). 2. Treat the output as P(ncRNA) (classes inverted: 0=coding, 1=ncRNA). Set P(coding)=1-P(ncRNA); if P(ncRNA) > 0.546569, classification is 'non-coding', else 'coding'. 3. Map to PredictionResultDTO]. Type: Task. 
   [ID-1.1.5] [PLANNING/SYNC]: [1. Open roadmap_9_crab_ml_sync.md and check - [x] for Story 1.1. 2. Append > Files touched: [files] under the story. 3. Open global_backlog.md and check - [x] for [REQ-026]]. Type: Task.
 
 EPIC 2: CRAB BRANDING & UI REFINEMENT (FRONTEND) | [ISOLATED VERTICAL]

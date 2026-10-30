@@ -21,7 +21,7 @@
 ## 🏗️ Technical Architecture
 
 - **Backend:** FastAPI 0.110+, Python 3.11+, Uvicorn (Asynchronous ASGI).
-- **ML Engine:** Native XGBoost (v2.0+) with calibrated 0.4629 threshold.
+- **ML Engine:** Native XGBoost (v2.0+) with calibrated 0.4534 threshold.
 - **Feature Engineering:** 64-dimensional non-overlapping codon matrix.
 - **Parsing:** Biopython stream-based FASTA processing (`Bio.SeqIO`).
 - **Frontend:** React 19 + Vite SPA (Headless hooks, JSZip, zero-I/O).

@@ -154,7 +154,7 @@ export const RunSection = ({ isRunning, disabled, onClick, result, file }) => {
               📊 Example Prediction Results (.fasta)
             </h3>
             <span style={{ fontSize: '12px', color: '#94a3b8' }}>
-              Cutoff Threshold: 0.4629
+              Cutoff Threshold: 0.4534
             </span>
           </div>
 

@@ -18,7 +18,7 @@ def test_standalone_main(mock_joblib_load, tmp_path):
     # Arrange
     mock_model = MagicMock()
     # Provide synthetic probabilities bypassing real XGBoost inference
-    mock_model.predict.return_value = [0.85, 0.15]
+    mock_model.predict.return_value = [0.15, 0.85]
     mock_joblib_load.return_value = mock_model
 
     fasta_file = tmp_path / "test.fasta"

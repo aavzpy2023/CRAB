@@ -18,6 +18,9 @@ from app.utils.fasta_parser import parse_fasta_bytes
 from app.utils.model_loader import load_model
 from app.utils.feature_extraction import extract_3mers, KMER_KEYS
 
+# The model outputs P(ncRNA); a sequence is ncRNA when it exceeds this cutoff.
+NCRNA_THRESHOLD = 0.546569037437439
+
 DNA_KMERS = [''.join(p) for p in itertools.product(['A', 'C', 'G', 'T'], repeat=3)]
 
 @asynccontextmanager
@@ -97,8 +100,10 @@ async def predict_fasta(request: PredictionRequestDTO):
         cols = raw_cols if has_cols else DNA_KMERS
         features = extract_3mers(record.sequence, cols)
         dmatrix = xgb.DMatrix(pd.DataFrame([features], columns=cols))
-        prob = float(app.state.model.predict(dmatrix)[0])
-        pred = 1 if prob > 0.4629 else 0
+        # The API contract is P(coding) = 1 - P(ncRNA).
+        p_ncrna = float(app.state.model.predict(dmatrix)[0])
+        prob = 1.0 - p_ncrna
+        pred = 0 if p_ncrna > NCRNA_THRESHOLD else 1
         classification = "coding" if pred == 1 else "non-coding"
         
         results.append(PredictionResultDTO(
@@ -151,8 +156,10 @@ async def run_inference(
         dmatrix = xgb.DMatrix(df)
         probs = app.state.model.predict(dmatrix)
         for r, prob in zip(records, probs):
-            p_val = float(prob)
-            label = "coding_protein" if p_val > 0.4629 else "ncRNA"
+            # The API contract is P(coding) = 1 - P(ncRNA).
+            p_ncrna = float(prob)
+            p_val = 1.0 - p_ncrna
+            label = "ncRNA" if p_ncrna > NCRNA_THRESHOLD else "coding_protein"
             predictions.append({
                 "id": r.header,
                 "sequence": r.sequence,
